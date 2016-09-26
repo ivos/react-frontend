@@ -8,10 +8,11 @@ import {initialize} from 'react-forms-ui'
 
 initialize()
 
-import RegisterPage from './user/RegisterPage'
 import './index.css'
 
+import AppRouter from './AppRouter'
+
 ReactDOM.render(
-	<RegisterPage/>,
+	<AppRouter/>,
 	document.getElementById('root')
 )

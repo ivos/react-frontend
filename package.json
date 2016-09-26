@@ -10,7 +10,8 @@
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.2",
-    "react-forms-ui": "^0.5.1"
+    "react-forms-ui": "^0.5.1",
+    "react-router": "^2.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
