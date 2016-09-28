@@ -2,6 +2,7 @@ import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
 import {processValidationError} from '../api'
+import {loggedIn} from '../local-storage'
 
 const validations = {
 	username: {
@@ -63,6 +64,7 @@ const RegisterPage = React.createClass({
 	},
 
 	onSubmit() {
+		const {router} = this.context
 		const {values} = this.state
 		fetch('/api/users', {
 			method: 'post',
@@ -84,7 +86,8 @@ const RegisterPage = React.createClass({
 			})
 			.then(response => response.json())
 			.then(session => {
-				window.localStorage.ReactFrontendSession = JSON.stringify(session)
+				loggedIn(session)
+				router.push('/home')
 			})
 			.catch(
 				err => console.error(err)
@@ -105,5 +108,9 @@ const RegisterPage = React.createClass({
 		}
 	},
 })
+
+RegisterPage.contextTypes = {
+	router: React.PropTypes.object,
+}
 
 export default RegisterPage
