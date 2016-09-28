@@ -1,12 +1,15 @@
-import React from 'react'
-// import Header from './Header'
+import React from "react";
+import {Grid} from "react-bootstrap";
+import Header from "./Header";
 
-const App = ({children}) => {
+const App = ({children, location: {pathname}}) => {
+	const active = pathname.split('/')[1] || 'home'
 	return (
-		<div>
-			{/*<Header active={active}/>*/}
+		<Grid fluid>
+			<Header active={active}/>
 			<div>{children}</div>
-		</div>
+		</Grid>
 	)
 }
+
 export default App
