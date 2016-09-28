@@ -22,6 +22,7 @@ const processValidationError = (form, convertFieldError, response) => {
 	} else if (response.status >= 300) {
 		console.error('Unknown server error.')
 	}
+	return response
 }
 
 export {processValidationError}

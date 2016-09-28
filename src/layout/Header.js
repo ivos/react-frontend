@@ -20,11 +20,10 @@ const Header = ({active}, {router}) => {
 			<Navbar.Collapse>
 				<Nav>
 					<NavItem eventKey={1} href="#home" active={('home' === active)}>Home</NavItem>
-					<NavItem eventKey={2} href="#register" active={('register' === active)}>Register</NavItem>
-					<NavItem eventKey={3} href="#login" active={('login' === active)}>Login</NavItem>
 				</Nav>
 				{!session &&
 				<Nav pullRight>
+					<NavItem eventKey={2} href="#register" active={('register' === active)}>Register</NavItem>
 					<NavItem eventKey={3} href="#login" active={('login' === active)}>Login</NavItem>
 				</Nav>
 				}

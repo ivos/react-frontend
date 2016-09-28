@@ -95,7 +95,7 @@ const RegisterPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		processValidationError(this, this.convertFieldError, response)
+		return processValidationError(this, this.convertFieldError, response)
 	},
 
 	convertFieldError(field, fieldErrors) {
