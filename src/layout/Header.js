@@ -2,11 +2,23 @@ import React from "react"
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap"
 import {getSession, loggedOut} from '../local-storage'
 import md5 from 'md5'
+import {Base64} from 'js-base64'
 import './Header.css'
 
-const handleLogout = router => () => {
-	loggedOut()
-	router.push('/login')
+const handleLogout = (router, {token}) => () => {
+	fetch('/api/sessions', {
+		method: 'delete',
+		headers: {
+			'Authorization': 'Basic ' + Base64.encode(token),
+		},
+	})
+		.then(() => {
+			loggedOut()
+			router.push('/login')
+		})
+		.catch(
+			err => console.error(err)
+		)
 }
 
 const Header = ({active}, {router}) => {
@@ -41,7 +53,7 @@ const Header = ({active}, {router}) => {
 							{session.user.name}
 						</MenuItem>
 						<MenuItem divider/>
-						<MenuItem eventKey={4.1} onClick={handleLogout(router)}>
+						<MenuItem eventKey={4.1} onClick={handleLogout(router, session)}>
 							<span className="fa fa-sign-out fa-fw"/> Log out
 						</MenuItem>
 					</NavDropdown>
