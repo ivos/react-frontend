@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button} from 'react-bootstrap'
 import {processValidationError, jsonContentHeader} from '../api'
@@ -15,16 +15,21 @@ const validations = {
 	},
 }
 
-const LoginPage = React.createClass({
-	getInitialState() {
-		return {}
-	},
+class LoginPage extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {}
+		this.setStateBound = this.setState.bind(this)
+		this.onSubmit = this.onSubmit.bind(this)
+		this.handleResponse = this.handleResponse.bind(this)
+		this.handleLoggedIn = this.handleLoggedIn.bind(this)
+	}
 
 	render() {
 		const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4'
 		const buttonsClass = 'col-sm-offset-2 col-sm-10'
 		return (
-			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
+			<Form ref="form" state={this.state} setState={this.setStateBound} validations={validations}
 			      onSubmit={this.onSubmit}>
 				<Panel header={<h3>Login</h3>}>
 					<TextField id="username" label="Username" classes={fieldClasses}/>
@@ -42,7 +47,7 @@ const LoginPage = React.createClass({
 				</Panel>
 			</Form>
 		)
-	},
+	}
 
 	onSubmit() {
 		const {values} = this.state
@@ -57,7 +62,7 @@ const LoginPage = React.createClass({
 			.catch(
 				err => console.error(err)
 			)
-	},
+	}
 
 	handleResponse(response) {
 		if (404 === response.status) {
@@ -66,20 +71,20 @@ const LoginPage = React.createClass({
 			throw new Error('User not found.')
 		}
 		return processValidationError(this, this.convertFieldError, response)
-	},
+	}
 
 	convertFieldError(field, fieldErrors) {
 		if ('password' === field && 'invalid' === fieldErrors[0]) {
 			return 'Invalid password.'
 		}
-	},
+	}
 
 	handleLoggedIn(session) {
 		const {router} = this.context
 		loggedIn(session)
 		router.push('/home')
-	},
-})
+	}
+}
 
 LoginPage.contextTypes = {
 	router: React.PropTypes.object,
