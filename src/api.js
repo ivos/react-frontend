@@ -1,3 +1,6 @@
+import {getSession} from './local-storage'
+import {Base64} from 'js-base64'
+
 const convertBackendValidationErrors = (convertFieldError, errors) => {
 	return Object.keys(errors).reduce((previous, current) => {
 		const fieldErrors = errors[current]
@@ -8,7 +11,7 @@ const convertBackendValidationErrors = (convertFieldError, errors) => {
 	}, {})
 }
 
-const processValidationError = (form, convertFieldError, response) => {
+export const processValidationError = (form, convertFieldError, response) => {
 	if (422 === response.status) {
 		response.json()
 			.then(errors => {
@@ -25,4 +28,13 @@ const processValidationError = (form, convertFieldError, response) => {
 	return response
 }
 
-export {processValidationError}
+export const authorizationHeader = () => {
+	const {token} = getSession()
+	return {
+		Authorization: 'Basic ' + Base64.encode(token),
+	}
+}
+
+export const jsonContentHeader = () => ({
+	'Content-Type': 'application/json',
+})

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
-import {processValidationError} from '../api'
+import {processValidationError, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 
 const validations = {
@@ -51,7 +51,7 @@ const RegisterPage = React.createClass({
 
 					<FormGroup>
 						<div className={buttonsClass}>
-							<Button type="submit" bsStyle="primary">
+							<Button type="submit" bsStyle="success">
 								<span className="fa fa-check"> </span> Register
 							</Button>
 						</div>
@@ -64,31 +64,16 @@ const RegisterPage = React.createClass({
 	},
 
 	onSubmit() {
-		const {router} = this.context
 		const {values} = this.state
 		fetch('/api/users', {
 			method: 'post',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			headers: jsonContentHeader(),
 			body: JSON.stringify(values),
 		})
 			.then(this.handleResponse)
-			.then(() => {
-				const {username, password} = values
-				return fetch('/api/sessions', {
-					method: 'post',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({username, password}),
-				})
-			})
+			.then(this.login)
 			.then(response => response.json())
-			.then(session => {
-				loggedIn(session)
-				router.push('/home')
-			})
+			.then(this.handleLoggedIn)
 			.catch(
 				err => console.error(err)
 			)
@@ -106,6 +91,21 @@ const RegisterPage = React.createClass({
 			return 'This e-mail is already registered.' +
 				' If you forgot your password, please contact the system administrator.'
 		}
+	},
+
+	login() {
+		const {values: {username, password}} = this.state
+		return fetch('/api/sessions', {
+			method: 'post',
+			headers: jsonContentHeader(),
+			body: JSON.stringify({username, password}),
+		})
+	},
+
+	handleLoggedIn(session) {
+		const {router} = this.context
+		loggedIn(session)
+		router.push('/home')
 	},
 })
 

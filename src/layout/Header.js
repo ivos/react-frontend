@@ -1,21 +1,21 @@
-import React from "react"
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap"
-import {getSession, loggedOut} from '../local-storage'
-import md5 from 'md5'
-import {Base64} from 'js-base64'
-import './Header.css'
+import React from "react";
+import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
+import {getSession, loggedOut} from "../local-storage";
+import {authorizationHeader} from "../api";
+import md5 from "md5";
+import "./Header.css";
 
-const handleLogout = (router, {token}) => () => {
+const handleLoggedOut = router => () => {
+	loggedOut()
+	router.push('/login')
+}
+
+const handleLogout = router => () => {
 	fetch('/api/sessions', {
 		method: 'delete',
-		headers: {
-			'Authorization': 'Basic ' + Base64.encode(token),
-		},
+		headers: authorizationHeader(),
 	})
-		.then(() => {
-			loggedOut()
-			router.push('/login')
-		})
+		.then(handleLoggedOut(router))
 		.catch(
 			err => console.error(err)
 		)
@@ -53,7 +53,7 @@ const Header = ({active}, {router}) => {
 							{session.user.name}
 						</MenuItem>
 						<MenuItem divider/>
-						<MenuItem eventKey={4.1} onClick={handleLogout(router, session)}>
+						<MenuItem eventKey={4.1} onClick={handleLogout(router)}>
 							<span className="fa fa-sign-out fa-fw"/> Log out
 						</MenuItem>
 					</NavDropdown>

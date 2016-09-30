@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button} from 'react-bootstrap'
-import {processValidationError} from '../api'
+import {processValidationError, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 
 const validations = {
@@ -45,21 +45,15 @@ const LoginPage = React.createClass({
 	},
 
 	onSubmit() {
-		const {router} = this.context
 		const {values} = this.state
 		fetch('/api/sessions', {
 			method: 'post',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			headers: jsonContentHeader(),
 			body: JSON.stringify(values),
 		})
 			.then(this.handleResponse)
 			.then(response => response.json())
-			.then(session => {
-				loggedIn(session)
-				router.push('/home')
-			})
+			.then(this.handleLoggedIn)
 			.catch(
 				err => console.error(err)
 			)
@@ -78,6 +72,12 @@ const LoginPage = React.createClass({
 		if ('password' === field && 'invalid' === fieldErrors[0]) {
 			return 'Invalid password.'
 		}
+	},
+
+	handleLoggedIn(session) {
+		const {router} = this.context
+		loggedIn(session)
+		router.push('/home')
 	},
 })
 
