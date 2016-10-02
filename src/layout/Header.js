@@ -1,9 +1,14 @@
-import React from "react";
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
-import {getSession, loggedOut} from "../local-storage";
-import {authorizationHeader} from "../api";
-import md5 from "md5";
-import "./Header.css";
+import React from 'react'
+import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+import {getSession, loggedOut} from '../local-storage'
+import {authorizationHeader} from '../api'
+import md5 from 'md5'
+import './Header.css'
+import flagCs from './flag-cs.jpg'
+import flagEn from './flag-en.jpg'
+import i18n from '../i18n'
+const t = i18n.t.bind(i18n)
+import {storeLocale} from '../local-storage'
 
 const handleLoggedOut = router => () => {
 	loggedOut()
@@ -21,8 +26,20 @@ const handleLogout = router => () => {
 		)
 }
 
+const setLocale = locale => event => {
+	event.preventDefault()
+	storeLocale(locale)
+	window.location.reload()
+}
+
 const Header = ({active}, {router}) => {
 	const session = getSession()
+	const locale = i18n.language
+	const localeLabels = {
+		en: <span><img src={flagEn} height="14" width="23" alt="English"/> English</span>,
+		cs: <span><img src={flagCs} height="14" width="21" alt="Česky"/> Česky</span>,
+	}
+	const currentLocaleLabel = localeLabels[locale]
 	return (
 		<Navbar fixedTop fluid>
 			<Navbar.Header>
@@ -33,12 +50,13 @@ const Header = ({active}, {router}) => {
 			</Navbar.Header>
 			<Navbar.Collapse>
 				<Nav>
-					<NavItem eventKey={1} href="#home" active={('home' === active)}>Home</NavItem>
+					<NavItem eventKey={1} href="#home" active={('home' === active)}>{t('home.title')}</NavItem>
 				</Nav>
 				{!session &&
 				<Nav pullRight>
-					<NavItem eventKey={2} href="#register" active={('register' === active)}>Register</NavItem>
-					<NavItem eventKey={3} href="#login" active={('login' === active)}>Login</NavItem>
+					<NavItem eventKey={2} href="#register" active={('register' === active)}>
+						{t('register.title')}</NavItem>
+					<NavItem eventKey={3} href="#login" active={('login' === active)}>{t('login.title')}</NavItem>
 				</Nav>
 				}
 				{session &&
@@ -54,11 +72,25 @@ const Header = ({active}, {router}) => {
 						</MenuItem>
 						<MenuItem divider/>
 						<MenuItem eventKey={4.1} onClick={handleLogout(router)}>
-							<span className="fa fa-sign-out fa-fw"/> Log out
+							<span className="fa fa-sign-out fa-fw"/> {t('menu.logout')}
 						</MenuItem>
 					</NavDropdown>
 				</Nav>
 				}
+				<Nav pullRight>
+					<NavDropdown eventKey={5} title={currentLocaleLabel} id="nav-language-dropdown">
+						{'en' !== locale &&
+						<MenuItem eventKey={5.1} onClick={setLocale('en')}>
+							{localeLabels.en}
+						</MenuItem>
+						}
+						{'cs' !== locale &&
+						<MenuItem eventKey={5.1} onClick={setLocale('cs')}>
+							{localeLabels.cs}
+						</MenuItem>
+						}
+					</NavDropdown>
+				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
 	)

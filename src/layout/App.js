@@ -1,6 +1,6 @@
-import React from "react";
-import {Grid} from "react-bootstrap";
-import Header from "./Header";
+import React from 'react'
+import {Grid} from 'react-bootstrap'
+import Header from './Header'
 
 const App = ({children, location: {pathname}}) => {
 	const active = pathname.split('/')[1] || 'home'

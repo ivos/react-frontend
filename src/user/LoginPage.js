@@ -1,8 +1,10 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
-import {Panel, FormGroup, Button} from 'react-bootstrap'
+import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
 import {processValidationError, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
+import i18n from '../i18n'
+const t = i18n.t.bind(i18n)
 
 const validations = {
 	username: {
@@ -26,14 +28,16 @@ const LoginPage = React.createClass({
 		return (
 			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
 			      onSubmit={this.onSubmit}>
-				<Panel header={<h3>Login</h3>}>
-					<TextField id="username" label="Username" classes={fieldClasses}/>
-					<PasswordField id="password" label="Password" classes={fieldClasses}/>
+				<Panel header={<h3>{t('login.title')}</h3>}>
+					<TextField id="username" label={t('login.username.label')} classes={fieldClasses}>
+						<HelpBlock>{t('login.username.help')}</HelpBlock>
+					</TextField>
+					<PasswordField id="password" label={t('login.password.label')} classes={fieldClasses}/>
 
 					<FormGroup>
 						<div className={buttonsClass}>
 							<Button type="submit" bsStyle="primary">
-								<span className="fa fa-check"> </span> Login
+								<span className="fa fa-check"> </span> {t('button.login')}
 							</Button>
 						</div>
 					</FormGroup>
@@ -61,7 +65,7 @@ const LoginPage = React.createClass({
 
 	handleResponse(response) {
 		if (404 === response.status) {
-			const messages = {username: ['This username was not found.']}
+			const messages = {username: [t('login.username.msg.notFound')]}
 			this.setState({messages}, this.refs.form.focusError)
 			throw new Error('User not found.')
 		}
@@ -70,7 +74,7 @@ const LoginPage = React.createClass({
 
 	convertFieldError(field, fieldErrors) {
 		if ('password' === field && 'invalid' === fieldErrors[0]) {
-			return 'Invalid password.'
+			return t('login.password.msg.invalid')
 		}
 	},
 

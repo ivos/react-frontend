@@ -3,6 +3,8 @@ import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
 import {processValidationError, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
+import i18n from '../i18n'
+const t = i18n.t.bind(i18n)
 
 const validations = {
 	username: {
@@ -39,20 +41,20 @@ const RegisterPage = React.createClass({
 		return (
 			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
 			      onSubmit={this.onSubmit}>
-				<Panel header={<h3>Register</h3>}>
-					<TextField id="username" label="Username" classes={fieldClasses}>
-						<HelpBlock>Only lower-case letters, numbers and underscores.</HelpBlock>
+				<Panel header={<h3>{t('register.title')}</h3>}>
+					<TextField id="username" label={t('register.username.label')} classes={fieldClasses}>
+						<HelpBlock>{t('register.username.help')}</HelpBlock>
 					</TextField>
-					<TextField id="email" label="E-mail" classes={fieldClasses}/>
-					<TextField id="name" label="Name" classes={fieldClasses}/>
-					<PasswordField id="password" label="Password" classes={fieldClasses}>
-						<HelpBlock>At least 6 characters.</HelpBlock>
+					<TextField id="email" label={t('register.email.label')} classes={fieldClasses}/>
+					<TextField id="name" label={t('register.name')} classes={fieldClasses}/>
+					<PasswordField id="password" label={t('register.password.label')} classes={fieldClasses}>
+						<HelpBlock>{t('register.password.help')}</HelpBlock>
 					</PasswordField>
 
 					<FormGroup>
 						<div className={buttonsClass}>
 							<Button type="submit" bsStyle="success">
-								<span className="fa fa-check"> </span> Register
+								<span className="fa fa-check"> </span> {t('button.register')}
 							</Button>
 						</div>
 					</FormGroup>
@@ -85,11 +87,10 @@ const RegisterPage = React.createClass({
 
 	convertFieldError(field, fieldErrors) {
 		if ('username' === field && 'duplicate' === fieldErrors[0]) {
-			return 'This username is already taken.'
+			return t('register.username.msg.duplicate')
 		}
 		if ('email' === field && 'duplicate' === fieldErrors[0]) {
-			return 'This e-mail is already registered.' +
-				' If you forgot your password, please contact the system administrator.'
+			return t('register.email.msg.duplicate')
 		}
 	},
 
