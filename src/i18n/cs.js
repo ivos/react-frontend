@@ -1,7 +1,20 @@
 const label = {
+	enum: {
+		user: {
+			status: {
+				active: 'Platný',
+				disabled: 'Zrušený',
+			},
+			role: {
+				user: 'Uživatel',
+				admin: 'Administrátor',
+			},
+		},
+	},
 	button: {
 		register: 'Zaregistrovat se',
 		login: 'Přihlásit se',
+		edit: 'Editovat',
 	},
 	menu: {
 		logout: 'Odhlásit se',
@@ -46,6 +59,14 @@ const label = {
 				invalid: 'Chybné heslo.',
 			},
 		},
+	},
+	profile: {
+		title: 'Můj profil',
+		username: 'Uživatelské jméno',
+		name: 'Jméno',
+		email: 'E-mail',
+		status: 'Status',
+		roles: 'Role',
 	},
 }
 

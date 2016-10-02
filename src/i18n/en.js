@@ -1,7 +1,20 @@
 const label = {
+	enum: {
+		user: {
+			status: {
+				active: 'Active',
+				disabled: 'Disabled',
+			},
+			role: {
+				user: 'User',
+				admin: 'Administrator',
+			},
+		},
+	},
 	button: {
 		register: 'Register',
 		login: 'Login',
+		edit: 'Edit',
 	},
 	menu: {
 		logout: 'Log out',
@@ -46,6 +59,14 @@ const label = {
 				invalid: 'Invalid password.',
 			},
 		},
+	},
+	profile: {
+		title: 'My profile',
+		username: 'Username',
+		name: 'Name',
+		email: 'E-mail',
+		status: 'Status',
+		roles: 'Roles',
 	},
 }
 

@@ -44,7 +44,7 @@ const Header = ({active}, {router}) => {
 		<Navbar fixedTop fluid>
 			<Navbar.Header>
 				<Navbar.Brand>
-					<a href="/app/#">React Frontend</a>
+					<a href="#/">React Frontend</a>
 				</Navbar.Brand>
 				<Navbar.Toggle />
 			</Navbar.Header>
@@ -71,7 +71,11 @@ const Header = ({active}, {router}) => {
 							{session.user.name}
 						</MenuItem>
 						<MenuItem divider/>
-						<MenuItem eventKey={4.1} onClick={handleLogout(router)}>
+						<MenuItem eventKey={4.2} href="#/profile">
+							<span className="fa fa-cog fa-fw"/> {t('profile.title')}
+						</MenuItem>
+						<MenuItem divider/>
+						<MenuItem eventKey={4.3} onClick={handleLogout(router)}>
 							<span className="fa fa-sign-out fa-fw"/> {t('menu.logout')}
 						</MenuItem>
 					</NavDropdown>
