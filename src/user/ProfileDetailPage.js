@@ -15,7 +15,7 @@ const statusStyle = status => {
 	}
 }
 
-const ProfilePage = React.createClass({
+const ProfileDetailPage = React.createClass({
 	getInitialState() {
 		return {}
 	},
@@ -73,4 +73,4 @@ const ProfilePage = React.createClass({
 	},
 })
 
-export default ProfilePage
+export default ProfileDetailPage
