@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
-import {processValidationError, jsonContentHeader} from '../api'
+import {processResponse, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
@@ -74,6 +74,7 @@ const RegisterPage = React.createClass({
 		})
 			.then(this.handleResponse)
 			.then(this.login)
+			.then(this.handleResponse)
 			.then(response => response.json())
 			.then(this.handleLoggedIn)
 			.catch(
@@ -82,7 +83,8 @@ const RegisterPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		return processValidationError(this, this.convertFieldError, response)
+		const {setSystemMessage} = this.context
+		return processResponse(response, setSystemMessage, this.convertFieldError, this)
 	},
 
 	convertFieldError(field, fieldErrors) {
@@ -112,6 +114,7 @@ const RegisterPage = React.createClass({
 
 RegisterPage.contextTypes = {
 	router: React.PropTypes.object,
+	setSystemMessage: React.PropTypes.func,
 }
 
 export default RegisterPage

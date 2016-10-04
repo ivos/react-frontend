@@ -1,4 +1,11 @@
 const label = {
+	msg: {
+		saved: 'Uloženo.',
+		conflict: 'Data mezitím změnil jiný uživatel. Prosím obnovte si data a proveďte Vaši změnu znovu.',
+		loggedOut: 'Byl(a) jste odhlášen(a). Prosím přihlašte se znovu.',
+		forbidden: 'Pro požadovanou akci nemáte oprávnění.',
+		systemError: 'Došlo k chybě při komunikaci se serverem. Prosím opakujte Vaši akci později.',
+	},
 	enum: {
 		user: {
 			status: {
@@ -15,6 +22,8 @@ const label = {
 		register: 'Zaregistrovat se',
 		login: 'Přihlásit se',
 		edit: 'Editovat',
+		save: 'Uložit',
+		back: 'Zpět',
 	},
 	menu: {
 		logout: 'Odhlásit se',

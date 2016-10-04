@@ -1,4 +1,11 @@
 const label = {
+	msg: {
+		saved: 'Saved.',
+		conflict: 'The data was modified by another user in the meantime. Please refresh the data and apply your changes again.',
+		loggedOut: 'You have been logged out. Please log in again.',
+		forbidden: 'You are not authorized to perform the requested action.',
+		systemError: 'There was an error while communicating with the server. Please repeat your action later.',
+	},
 	enum: {
 		user: {
 			status: {
@@ -15,6 +22,8 @@ const label = {
 		register: 'Register',
 		login: 'Login',
 		edit: 'Edit',
+		save: 'Save',
+		back: 'Back',
 	},
 	menu: {
 		logout: 'Log out',

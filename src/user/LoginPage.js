@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
-import {processValidationError, jsonContentHeader} from '../api'
+import {processResponse, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
@@ -64,12 +64,13 @@ const LoginPage = React.createClass({
 	},
 
 	handleResponse(response) {
+		const {setSystemMessage} = this.context
 		if (404 === response.status) {
 			const messages = {username: [t('login.username.msg.notFound')]}
 			this.setState({messages}, this.refs.form.focusError)
 			throw new Error('User not found.')
 		}
-		return processValidationError(this, this.convertFieldError, response)
+		return processResponse(response, setSystemMessage, this.convertFieldError, this)
 	},
 
 	convertFieldError(field, fieldErrors) {
@@ -87,6 +88,7 @@ const LoginPage = React.createClass({
 
 LoginPage.contextTypes = {
 	router: React.PropTypes.object,
+	setSystemMessage: React.PropTypes.func,
 }
 
 export default LoginPage

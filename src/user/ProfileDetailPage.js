@@ -1,10 +1,11 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import {Form, TextField, CustomField} from 'react-forms-ui'
 import {Panel, Label, FormGroup, Button} from 'react-bootstrap'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession} from '../local-storage'
-import {authorizationHeader} from '../api'
+import {processResponse, authorizationHeader} from '../api'
 
 const statusStyle = status => {
 	switch (status) {
@@ -48,8 +49,11 @@ const ProfileDetailPage = React.createClass({
 
 					<FormGroup>
 						<div className={buttonsClass}>
-							<Button>
+							<Button ref="edit" href="#/profile/edit" autoFocus>
 								<span className="fa fa-edit"> </span> {t('button.edit')}
+							</Button>
+							<Button bsStyle="link" className="pull-right" href="#/">
+								<span className="fa fa-chevron-left"> </span> {t('button.back')}
 							</Button>
 						</div>
 					</FormGroup>
@@ -59,10 +63,13 @@ const ProfileDetailPage = React.createClass({
 	},
 
 	componentDidMount() {
+		ReactDOM.findDOMNode(this.refs.edit).focus()
+
 		const {user: {username}} = getSession()
 		fetch(`/api/users/${username}`, {
 			headers: authorizationHeader(),
 		})
+			.then(this.handleResponse)
 			.then(response => response.json())
 			.then(values => {
 				this.setState({values})
@@ -71,6 +78,15 @@ const ProfileDetailPage = React.createClass({
 				err => console.error(err)
 			)
 	},
+
+	handleResponse(response) {
+		const {setSystemMessage} = this.context
+		return processResponse(response, setSystemMessage, this.convertFieldError, this)
+	},
 })
+
+ProfileDetailPage.contextTypes = {
+	setSystemMessage: React.PropTypes.func,
+}
 
 export default ProfileDetailPage
