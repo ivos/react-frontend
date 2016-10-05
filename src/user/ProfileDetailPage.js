@@ -31,10 +31,10 @@ const ProfileDetailPage = React.createClass({
 					<CustomField id="username" label={t('profile.username')} classes={fieldClasses} readonly>
 						<code>{values.username}</code>
 					</CustomField>
-					<TextField id="name" label={t('profile.name')} classes={fieldClasses} readonly/>
 					<CustomField id="email" label={t('profile.email')} classes={fieldClasses} readonly>
 						<a href={'mailto:' + values.email}>{values.email}</a>
 					</CustomField>
+					<TextField id="name" label={t('profile.name')} classes={fieldClasses} readonly/>
 					<CustomField id="status" label={t('profile.status')} classes={fieldClasses} readonly>
 						<Label bsStyle={statusStyle(values.status)}>
 							{t('enum.user.status.' + values.status)}</Label>
@@ -86,7 +86,9 @@ const ProfileDetailPage = React.createClass({
 })
 
 ProfileDetailPage.contextTypes = {
+	router: React.PropTypes.object,
 	setSystemMessage: React.PropTypes.func,
+	setAfterLogin: React.PropTypes.func,
 }
 
 export default ProfileDetailPage

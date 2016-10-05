@@ -55,6 +55,9 @@ const label = {
 	},
 	login: {
 		title: 'Přihlášení',
+		msg: {
+			success: 'Přihlášen.',
+		},
 		username: {
 			label: 'Uživatelské jméno',
 			help: 'Zadejte Vaše uživatelské jméno nebo e-mail.',

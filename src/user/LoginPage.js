@@ -80,15 +80,17 @@ const LoginPage = React.createClass({
 	},
 
 	handleLoggedIn(session) {
-		const {router} = this.context
+		const {router, afterLogin, setSystemMessage} = this.context
 		loggedIn(session)
-		router.push('/home')
+		router.push(afterLogin() || '/home')
+		setSystemMessage({type: 'success', text: t('login.msg.success')})
 	},
 })
 
 LoginPage.contextTypes = {
 	router: React.PropTypes.object,
 	setSystemMessage: React.PropTypes.func,
+	afterLogin: React.PropTypes.func,
 }
 
 export default LoginPage

@@ -55,6 +55,9 @@ const label = {
 	},
 	login: {
 		title: 'Login',
+		msg: {
+			success: 'Logged in.',
+		},
 		username: {
 			label: 'Username',
 			help: 'Enter your username or e-mail.',

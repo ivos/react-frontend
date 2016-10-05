@@ -8,10 +8,10 @@ import LoginPage from './user/LoginPage'
 import ProfileDetailPage from './user/ProfileDetailPage'
 import ProfileEditPage from './user/ProfileEditPage'
 
-const appHistory = useRouterHistory(createHashHistory)({queryKey: false})
+const history = useRouterHistory(createHashHistory)({queryKey: false})
 
 const AppRouter = () => (
-	<Router history={appHistory}>
+	<Router history={history}>
 		<Route path="/" component={App}>
 			<Route path="/register" component={RegisterPage}/>
 			<Route path="/login" component={LoginPage}/>

@@ -127,6 +127,7 @@ ProfileEditPage.contextTypes = {
 	router: React.PropTypes.object,
 	setSystemMessage: React.PropTypes.func,
 	setSaved: React.PropTypes.func,
+	setAfterLogin: React.PropTypes.func,
 }
 
 export default ProfileEditPage
