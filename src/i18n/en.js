@@ -12,6 +12,7 @@ const label = {
 		edit: 'Edit',
 		save: 'Save',
 		back: 'Back',
+		changePassword: 'Change password',
 	},
 	user: {
 		username: {
@@ -72,6 +73,9 @@ const label = {
 	},
 	editProfile: {
 		title: 'Edit my profile',
+	},
+	changePassword: {
+		title: 'Change password',
 	},
 }
 

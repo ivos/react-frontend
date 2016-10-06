@@ -50,8 +50,11 @@ const ProfileDetailPage = React.createClass({
 
 					<FormGroup>
 						<div className={buttonsClass}>
-							<Button ref="edit" href="#/profile/edit" autoFocus>
+							<Button ref="edit" href="#/profile/edit" className="spaced">
 								<span className="fa fa-edit"> </span> {t('button.edit')}
+							</Button>
+							<Button href="#/profile/change-password" className="spaced">
+								<span className="fa fa-unlock-alt"> </span> {t('button.changePassword')}
 							</Button>
 							<Button bsStyle="link" className="pull-right" href="#/">
 								<span className="fa fa-chevron-left"> </span> {t('button.back')}

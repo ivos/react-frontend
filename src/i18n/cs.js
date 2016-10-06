@@ -12,6 +12,7 @@ const label = {
 		edit: 'Editovat',
 		save: 'Uložit',
 		back: 'Zpět',
+		changePassword: 'Změnit heslo',
 	},
 	user: {
 		username: {
@@ -72,6 +73,9 @@ const label = {
 	},
 	editProfile: {
 		title: 'Editace mého profilu',
+	},
+	changePassword: {
+		title: 'Změna hesla',
 	},
 }
 

@@ -74,8 +74,11 @@ const Header = ({active}, {router}) => {
 						<MenuItem eventKey={4.2} href="#/profile">
 							<span className="fa fa-cog fa-fw"/> {t('profile.title')}
 						</MenuItem>
+						<MenuItem eventKey={4.3} href="#/profile/change-password">
+							<span className="fa fa-unlock-alt fa-fw"/> {t('changePassword.title')}
+						</MenuItem>
 						<MenuItem divider/>
-						<MenuItem eventKey={4.3} onClick={handleLogout(router)}>
+						<MenuItem eventKey={4.4} onClick={handleLogout(router)}>
 							<span className="fa fa-sign-out fa-fw"/> {t('logout.title')}
 						</MenuItem>
 					</NavDropdown>
