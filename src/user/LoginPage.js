@@ -5,6 +5,7 @@ import {processResponse, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
+import wrapPage from '../wrapPage'
 
 const validations = {
 	username: {
@@ -64,13 +65,12 @@ const LoginPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		const {setSystemMessage} = this.context
 		if (404 === response.status) {
 			const messages = {username: [t('login.username.msg.notFound')]}
 			this.setState({messages}, this.refs.form.focusError)
 			throw new Error('User not found.')
 		}
-		return processResponse(response, setSystemMessage, this.convertFieldError, this)
+		return processResponse(response, this)
 	},
 
 	convertFieldError(field, fieldErrors) {
@@ -80,17 +80,11 @@ const LoginPage = React.createClass({
 	},
 
 	handleLoggedIn(session) {
-		const {router, afterLogin, setSystemMessage} = this.context
+		const {router, afterLogin, setSystemMessage} = this.props
 		loggedIn(session)
 		router.push(afterLogin() || '/home')
 		setSystemMessage({type: 'success', text: t('login.msg.success')})
 	},
 })
 
-LoginPage.contextTypes = {
-	router: React.PropTypes.object,
-	setSystemMessage: React.PropTypes.func,
-	afterLogin: React.PropTypes.func,
-}
-
-export default LoginPage
+export default wrapPage(LoginPage)

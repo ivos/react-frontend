@@ -13,12 +13,14 @@ const wrapPage = WrappedComponent => {
 			setSystemMessage: React.PropTypes.func,
 			setSaved: React.PropTypes.func,
 			setAfterLogin: React.PropTypes.func,
+			afterLogin: React.PropTypes.func,
 		},
 		propTypes: {
 			router: routerShape,
 			setSystemMessage: React.PropTypes.func,
 			setSaved: React.PropTypes.func,
 			setAfterLogin: React.PropTypes.func,
+			afterLogin: React.PropTypes.func,
 		},
 
 		render() {
@@ -26,7 +28,8 @@ const wrapPage = WrappedComponent => {
 			const setSystemMessage = this.props.setSystemMessage || this.context.setSystemMessage
 			const setSaved = this.props.setSaved || this.context.setSaved
 			const setAfterLogin = this.props.setAfterLogin || this.context.setAfterLogin
-			const props = {...this.props, router, setSystemMessage, setSaved, setAfterLogin,}
+			const afterLogin = this.props.afterLogin || this.context.afterLogin
+			const props = {...this.props, router, setSystemMessage, setSaved, setAfterLogin, afterLogin,}
 			return <WrappedComponent {...props} />
 		}
 	})

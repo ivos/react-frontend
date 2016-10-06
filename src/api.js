@@ -13,11 +13,14 @@ const convertBackendValidationErrors = (convertFieldError, errors) => {
 	}, {})
 }
 
-export const processResponse = (response, setSystemMessage, convertFieldError, form) => {
+export const processResponse = (response, form, options) => {
+	const convertFieldError = (options && options.convertFieldError) ?
+		options.convertFieldError :
+		form.convertFieldError
 	if (401 === response.status) { // Unauthorized
 		console.error('Unauthorized.')
 		loggedOut()
-		setSystemMessage({text: t('msg.loggedOut')})
+		form.props.setSystemMessage({text: t('msg.loggedOut')})
 		const {router, setAfterLogin, location} = form.props
 		if (router) {
 			if (setAfterLogin && location) {
@@ -28,7 +31,7 @@ export const processResponse = (response, setSystemMessage, convertFieldError, f
 		throw new Error('User not authenticated.')
 	} else if (403 === response.status) { // Forbidden
 		console.error('Forbidden.')
-		setSystemMessage({text: t('msg.forbidden')})
+		form.props.setSystemMessage({text: t('msg.forbidden')})
 		throw new Error('User not authorized (forbidden).')
 	} else if (422 === response.status) { // Unprocessable entity
 		response.json()
@@ -42,11 +45,11 @@ export const processResponse = (response, setSystemMessage, convertFieldError, f
 		throw new Error('Backend validation error.')
 	} else if (412 === response.status) { // Precondition failed (conflict)
 		console.error('Conflict.')
-		setSystemMessage({text: t('msg.conflict')})
+		form.props.setSystemMessage({text: t('msg.conflict')})
 		throw new Error('Precondition failed error.')
 	} else if (response.status >= 300) {
 		console.error('Unknown server error ' + response.status + '.')
-		setSystemMessage({text: t('msg.systemError')})
+		form.props.setSystemMessage({text: t('msg.systemError')})
 		throw new Error('Server system error ' + response.status + '.')
 	}
 	return response

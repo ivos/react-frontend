@@ -5,6 +5,7 @@ import {processResponse, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
+import wrapPage from '../wrapPage'
 
 const validations = {
 	username: {
@@ -83,8 +84,7 @@ const RegisterPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		const {setSystemMessage} = this.context
-		return processResponse(response, setSystemMessage, this.convertFieldError, this)
+		return processResponse(response, this)
 	},
 
 	convertFieldError(field, fieldErrors) {
@@ -106,15 +106,10 @@ const RegisterPage = React.createClass({
 	},
 
 	handleLoggedIn(session) {
-		const {router} = this.context
+		const {router} = this.props
 		loggedIn(session)
 		router.push('/home')
 	},
 })
 
-RegisterPage.contextTypes = {
-	router: React.PropTypes.object,
-	setSystemMessage: React.PropTypes.func,
-}
-
-export default RegisterPage
+export default wrapPage(RegisterPage)

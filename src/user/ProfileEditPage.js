@@ -98,8 +98,7 @@ const ProfileEditPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		const {setSystemMessage} = this.props
-		return processResponse(response, setSystemMessage, this.convertFieldError, this)
+		return processResponse(response, this)
 	},
 
 	convertFieldError(field, fieldErrors) {
