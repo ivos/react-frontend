@@ -13,7 +13,7 @@ const convertBackendValidationErrors = (convertFieldError, errors) => {
 	}, {})
 }
 
-export const processResponse = (response, form, options) => {
+export const processResponse = (form, options) => response => {
 	const convertFieldError = (options && options.convertFieldError) ?
 		options.convertFieldError :
 		form.convertFieldError

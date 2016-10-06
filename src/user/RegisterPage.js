@@ -73,18 +73,14 @@ const RegisterPage = React.createClass({
 			headers: jsonContentHeader(),
 			body: JSON.stringify(values),
 		})
-			.then(this.handleResponse)
+			.then(processResponse(this))
 			.then(this.login)
-			.then(this.handleResponse)
+			.then(processResponse(this))
 			.then(response => response.json())
 			.then(this.handleLoggedIn)
 			.catch(
 				err => console.error(err)
 			)
-	},
-
-	handleResponse(response) {
-		return processResponse(response, this)
 	},
 
 	convertFieldError(field, fieldErrors) {

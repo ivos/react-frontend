@@ -70,7 +70,7 @@ const LoginPage = React.createClass({
 			this.setState({messages}, this.refs.form.focusError)
 			throw new Error('User not found.')
 		}
-		return processResponse(response, this)
+		return processResponse(this)(response)
 	},
 
 	convertFieldError(field, fieldErrors) {

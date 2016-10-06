@@ -63,7 +63,7 @@ const ProfileEditPage = React.createClass({
 		fetch(`/api/users/${username}`, {
 			headers: authorizationHeader(),
 		})
-			.then(this.handleResponse)
+			.then(processResponse(this))
 			.then(response => {
 				version = response.headers.get('ETag')
 				return response
@@ -90,15 +90,11 @@ const ProfileEditPage = React.createClass({
 			},
 			body: JSON.stringify({username, email, name}),
 		})
-			.then(this.handleResponse)
+			.then(processResponse(this))
 			.then(this.handleUpdated)
 			.catch(
 				err => console.error(err)
 			)
-	},
-
-	handleResponse(response) {
-		return processResponse(response, this)
 	},
 
 	convertFieldError(field, fieldErrors) {

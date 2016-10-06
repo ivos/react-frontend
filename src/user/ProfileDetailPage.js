@@ -70,7 +70,7 @@ const ProfileDetailPage = React.createClass({
 		fetch(`/api/users/${username}`, {
 			headers: authorizationHeader(),
 		})
-			.then(this.handleResponse)
+			.then(processResponse(this))
 			.then(response => response.json())
 			.then(values => {
 				this.setState({values})
@@ -78,10 +78,6 @@ const ProfileDetailPage = React.createClass({
 			.catch(
 				err => console.error(err)
 			)
-	},
-
-	handleResponse(response) {
-		return processResponse(response, this)
 	},
 })
 
