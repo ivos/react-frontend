@@ -30,10 +30,10 @@ const LoginPage = React.createClass({
 			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
 			      onSubmit={this.onSubmit}>
 				<Panel header={<h3>{t('login.title')}</h3>}>
-					<TextField id="username" label={t('login.username.label')} classes={fieldClasses}>
-						<HelpBlock>{t('login.username.help')}</HelpBlock>
+					<TextField id="username" label={t('user.username.label')} classes={fieldClasses}>
+						<HelpBlock>{t('user.username.helpLogin')}</HelpBlock>
 					</TextField>
-					<PasswordField id="password" label={t('login.password.label')} classes={fieldClasses}/>
+					<PasswordField id="password" label={t('user.password.label')} classes={fieldClasses}/>
 
 					<FormGroup>
 						<div className={buttonsClass}>
@@ -66,7 +66,7 @@ const LoginPage = React.createClass({
 
 	handleResponse(response) {
 		if (404 === response.status) {
-			const messages = {username: [t('login.username.msg.notFound')]}
+			const messages = {username: [t('user.username.msg.notFound')]}
 			this.setState({messages}, this.refs.form.focusError)
 			throw new Error('User not found.')
 		}
@@ -75,7 +75,7 @@ const LoginPage = React.createClass({
 
 	convertFieldError(field, fieldErrors) {
 		if ('password' === field && 'invalid' === fieldErrors[0]) {
-			return t('login.password.msg.invalid')
+			return t('user.password.msg.invalid')
 		}
 	},
 

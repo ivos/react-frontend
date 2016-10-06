@@ -29,22 +29,22 @@ const ProfileDetailPage = React.createClass({
 		return (
 			<Form state={this.state} setState={this.setState.bind(this)}>
 				<Panel header={<h3>{t('profile.title')}</h3>}>
-					<CustomField id="username" label={t('profile.username')} classes={fieldClasses} readonly>
+					<CustomField id="username" label={t('user.username.label')} classes={fieldClasses} readonly>
 						<code>{values.username}</code>
 					</CustomField>
-					<CustomField id="email" label={t('profile.email')} classes={fieldClasses} readonly>
+					<CustomField id="email" label={t('user.email.label')} classes={fieldClasses} readonly>
 						<a href={'mailto:' + values.email}>{values.email}</a>
 					</CustomField>
-					<TextField id="name" label={t('profile.name')} classes={fieldClasses} readonly/>
-					<CustomField id="status" label={t('profile.status')} classes={fieldClasses} readonly>
+					<TextField id="name" label={t('user.name')} classes={fieldClasses} readonly/>
+					<CustomField id="status" label={t('user.status.label')} classes={fieldClasses} readonly>
 						<Label bsStyle={statusStyle(values.status)}>
-							{t('enum.user.status.' + values.status)}</Label>
+							{t('user.status.values.' + values.status)}</Label>
 					</CustomField>
-					<CustomField id="roles" label={t('profile.roles')} classes={fieldClasses} readonly>
+					<CustomField id="roles" label={t('user.roles.label')} classes={fieldClasses} readonly>
 						{values.roles ?
 							values.roles.split(',').map(role =>
 								<Label key={role} bsStyle="primary" className="spaced">
-									{t('enum.user.role.' + role)}</Label>
+									{t('user.roles.values.' + role)}</Label>
 							) : ''}
 					</CustomField>
 

@@ -76,7 +76,7 @@ const Header = ({active}, {router}) => {
 						</MenuItem>
 						<MenuItem divider/>
 						<MenuItem eventKey={4.3} onClick={handleLogout(router)}>
-							<span className="fa fa-sign-out fa-fw"/> {t('menu.logout')}
+							<span className="fa fa-sign-out fa-fw"/> {t('logout.title')}
 						</MenuItem>
 					</NavDropdown>
 				</Nav>

@@ -37,10 +37,10 @@ const ProfileEditPage = React.createClass({
 		return (
 			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
 			      onSubmit={this.onSubmit}>
-				<Panel header={<h3>{t('profile.title')}</h3>}>
-					<TextField id="username" label={t('profile.username')} classes={fieldClasses}/>
-					<TextField id="email" label={t('profile.email')} classes={fieldClasses}/>
-					<TextField id="name" label={t('profile.name')} classes={fieldClasses}/>
+				<Panel header={<h3>{t('editProfile.title')}</h3>}>
+					<TextField id="username" label={t('user.username.label')} classes={fieldClasses}/>
+					<TextField id="email" label={t('user.email.label')} classes={fieldClasses}/>
+					<TextField id="name" label={t('user.name')} classes={fieldClasses}/>
 
 					<FormGroup>
 						<div className={buttonsClass}>

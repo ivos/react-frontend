@@ -43,13 +43,13 @@ const RegisterPage = React.createClass({
 			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
 			      onSubmit={this.onSubmit}>
 				<Panel header={<h3>{t('register.title')}</h3>}>
-					<TextField id="username" label={t('register.username.label')} classes={fieldClasses}>
-						<HelpBlock>{t('register.username.help')}</HelpBlock>
+					<TextField id="username" label={t('user.username.label')} classes={fieldClasses}>
+						<HelpBlock>{t('user.username.help')}</HelpBlock>
 					</TextField>
-					<TextField id="email" label={t('register.email.label')} classes={fieldClasses}/>
-					<TextField id="name" label={t('register.name')} classes={fieldClasses}/>
-					<PasswordField id="password" label={t('register.password.label')} classes={fieldClasses}>
-						<HelpBlock>{t('register.password.help')}</HelpBlock>
+					<TextField id="email" label={t('user.email.label')} classes={fieldClasses}/>
+					<TextField id="name" label={t('user.name')} classes={fieldClasses}/>
+					<PasswordField id="password" label={t('user.password.label')} classes={fieldClasses}>
+						<HelpBlock>{t('user.password.help')}</HelpBlock>
 					</PasswordField>
 
 					<FormGroup>
@@ -85,10 +85,10 @@ const RegisterPage = React.createClass({
 
 	convertFieldError(field, fieldErrors) {
 		if ('username' === field && 'duplicate' === fieldErrors[0]) {
-			return t('register.username.msg.duplicate')
+			return t('user.username.msg.duplicate')
 		}
 		if ('email' === field && 'duplicate' === fieldErrors[0]) {
-			return t('register.email.msg.duplicate')
+			return t('user.email.msg.duplicate')
 		}
 	},
 

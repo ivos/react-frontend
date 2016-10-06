@@ -6,18 +6,6 @@ const label = {
 		forbidden: 'You are not authorized to perform the requested action.',
 		systemError: 'There was an error while communicating with the server. Please repeat your action later.',
 	},
-	enum: {
-		user: {
-			status: {
-				active: 'Active',
-				disabled: 'Disabled',
-			},
-			role: {
-				user: 'User',
-				admin: 'Administrator',
-			},
-		},
-	},
 	button: {
 		register: 'Register',
 		login: 'Login',
@@ -25,60 +13,65 @@ const label = {
 		save: 'Save',
 		back: 'Back',
 	},
-	menu: {
-		logout: 'Log out',
-	},
-	home: {
-		title: 'Home',
-	},
-	register: {
-		title: 'Register',
+	user: {
 		username: {
 			label: 'Username',
 			help: 'Only lower-case letters, numbers and underscores.',
+			helpLogin: 'Enter your username or e-mail.',
 			msg: {
 				duplicate: 'This username is already taken.',
+				notFound: 'This username was not found.',
 			},
 		},
 		email: {
 			label: 'E-mail',
 			msg: {
-				duplicate: 'This e-mail is already registered.' +
-				' If you forgot your password, please contact the system administrator.',
+				duplicate: 'This e-mail is already registered. If you forgot your password, please contact the system administrator.',
 			},
 		},
 		name: 'Name',
 		password: {
 			label: 'Password',
 			help: 'At least 6 characters.',
+			msg: {
+				invalid: 'Invalid password.',
+			},
 		},
+		status: {
+			label: 'Status',
+			values: {
+				active: 'Active',
+				disabled: 'Disabled',
+			},
+		},
+		roles: {
+			label: 'Roles',
+			values: {
+				user: 'User',
+				admin: 'Administrator',
+			},
+		},
+	},
+	home: {
+		title: 'Home',
+	},
+	register: {
+		title: 'Register',
 	},
 	login: {
 		title: 'Login',
 		msg: {
 			success: 'Logged in.',
 		},
-		username: {
-			label: 'Username',
-			help: 'Enter your username or e-mail.',
-			msg: {
-				notFound: 'This username was not found.',
-			},
-		},
-		password: {
-			label: 'Password',
-			msg: {
-				invalid: 'Invalid password.',
-			},
-		},
+	},
+	logout: {
+		title: 'Log out',
 	},
 	profile: {
 		title: 'My profile',
-		username: 'Username',
-		name: 'Name',
-		email: 'E-mail',
-		status: 'Status',
-		roles: 'Roles',
+	},
+	editProfile: {
+		title: 'Edit my profile',
 	},
 }
 
