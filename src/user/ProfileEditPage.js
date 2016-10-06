@@ -5,6 +5,7 @@ import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession, loggedIn} from '../local-storage'
 import {processResponse, jsonContentHeader, authorizationHeader, ifMatchHeader} from '../api'
+import wrapPage from '../wrapPage'
 
 const validations = {
 	username: {
@@ -97,7 +98,7 @@ const ProfileEditPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		const {setSystemMessage} = this.context
+		const {setSystemMessage} = this.props
 		return processResponse(response, setSystemMessage, this.convertFieldError, this)
 	},
 
@@ -117,17 +118,10 @@ const ProfileEditPage = React.createClass({
 		session.user = {...session.user, ...{username, email, name}}
 		loggedIn(session)
 
-		const {router, setSaved} = this.context
+		const {router, setSaved} = this.props
 		setSaved()
 		router.push('/profile')
 	},
 })
 
-ProfileEditPage.contextTypes = {
-	router: React.PropTypes.object,
-	setSystemMessage: React.PropTypes.func,
-	setSaved: React.PropTypes.func,
-	setAfterLogin: React.PropTypes.func,
-}
-
-export default ProfileEditPage
+export default wrapPage(ProfileEditPage)

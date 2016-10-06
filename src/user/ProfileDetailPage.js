@@ -6,6 +6,7 @@ import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession} from '../local-storage'
 import {processResponse, authorizationHeader} from '../api'
+import wrapPage from '../wrapPage'
 
 const statusStyle = status => {
 	switch (status) {
@@ -80,15 +81,9 @@ const ProfileDetailPage = React.createClass({
 	},
 
 	handleResponse(response) {
-		const {setSystemMessage} = this.context
+		const {setSystemMessage} = this.props
 		return processResponse(response, setSystemMessage, this.convertFieldError, this)
 	},
 })
 
-ProfileDetailPage.contextTypes = {
-	router: React.PropTypes.object,
-	setSystemMessage: React.PropTypes.func,
-	setAfterLogin: React.PropTypes.func,
-}
-
-export default ProfileDetailPage
+export default wrapPage(ProfileDetailPage)

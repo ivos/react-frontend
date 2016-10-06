@@ -18,8 +18,7 @@ export const processResponse = (response, setSystemMessage, convertFieldError, f
 		console.error('Unauthorized.')
 		loggedOut()
 		setSystemMessage({text: t('msg.loggedOut')})
-		const {router, setAfterLogin} = form.context
-		const {location} = form.props
+		const {router, setAfterLogin, location} = form.props
 		if (router) {
 			if (setAfterLogin && location) {
 				setAfterLogin(location.pathname)
