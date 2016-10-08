@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, PasswordField} from 'react-forms-ui'
-import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
-import {LinkContainer} from 'react-router-bootstrap'
+import {Panel, FormGroup, HelpBlock} from 'react-bootstrap'
+import {LinkBack, SaveButton} from '../ui/buttons'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession} from '../local-storage'
@@ -34,14 +34,8 @@ const ChangePasswordPage = React.createClass({
 
 					<FormGroup>
 						<div className={buttonsClass}>
-							<Button type="submit" bsStyle="primary">
-								<span className="fa fa-check"> </span> {t('button.save')}
-							</Button>
-							<LinkContainer to="/profile">
-								<Button bsStyle="link" className="pull-right">
-									<span className="fa fa-chevron-left"> </span> {t('button.back')}
-								</Button>
-							</LinkContainer>
+							<SaveButton/>
+							<LinkBack to="/profile"/>
 						</div>
 					</FormGroup>
 				</Panel>
