@@ -2,6 +2,7 @@ import React from 'react'
 import {Form, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, HelpBlock} from 'react-bootstrap'
 import {LinkBack, SaveButton} from '../ui/buttons'
+import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession} from '../local-storage'
@@ -26,12 +27,13 @@ const ChangePasswordPage = React.createClass({
 	},
 
 	render() {
+		const {loading} = this.state
 		const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4'
 		const buttonsClass = 'col-sm-offset-2 col-sm-10'
 		return (
 			<Form ref="form" state={this.state} setState={this.setState.bind(this)} validations={validations}
 			      onSubmit={this.onSubmit}>
-				<Panel header={<h3>{t('changePassword.title')}</h3>}>
+				<Panel header={<h3>{t('changePassword.title')} <Loading loading={loading}/></h3>}>
 					<PasswordField id="password" label={t('user.password.label')} classes={fieldClasses}>
 						<HelpBlock>{t('user.password.help')}</HelpBlock>
 					</PasswordField>
@@ -48,6 +50,7 @@ const ChangePasswordPage = React.createClass({
 	},
 
 	componentDidMount() {
+		this.setState({loading: true})
 		const {user: {username}} = getSession()
 		let version
 		fetch(`/api/users/${username}`, {
@@ -60,7 +63,7 @@ const ChangePasswordPage = React.createClass({
 			})
 			.then(response => response.json())
 			.then(values => {
-				this.setState({version, values})
+				this.setState({version, values, loading: false})
 			})
 			.catch(
 				err => console.error(err)

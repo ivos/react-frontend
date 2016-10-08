@@ -4,6 +4,7 @@ import {Form, TextField, CustomField} from 'react-forms-ui'
 import {Panel, Label, FormGroup, Button} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {LinkBack} from '../ui/buttons'
+import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession} from '../local-storage'
@@ -29,12 +30,13 @@ const ProfileDetailPage = React.createClass({
 	},
 
 	render() {
+		const {loading} = this.state
 		const {values = {}} = this.state
 		const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4'
 		const buttonsClass = 'col-sm-offset-2 col-sm-10'
 		return (
 			<Form state={this.state} setState={this.setState.bind(this)}>
-				<Panel header={<h3>{t('profile.title')}</h3>}>
+				<Panel header={<h3>{t('profile.title')} <Loading loading={loading}/></h3>}>
 					<CustomField id="username" label={t('user.username.label')} classes={fieldClasses} readonly>
 						<code>{values.username}</code>
 					</CustomField>
@@ -75,6 +77,7 @@ const ProfileDetailPage = React.createClass({
 	},
 
 	componentDidMount() {
+		this.setState({loading: true})
 		ReactDOM.findDOMNode(this.refs.edit).focus()
 
 		const {user: {username}} = getSession()
@@ -84,7 +87,7 @@ const ProfileDetailPage = React.createClass({
 			.then(processResponse(this))
 			.then(response => response.json())
 			.then(values => {
-				this.setState({values})
+				this.setState({values, loading: false})
 			})
 			.catch(
 				err => console.error(err)
