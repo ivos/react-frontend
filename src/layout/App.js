@@ -14,6 +14,7 @@ const App = React.createClass({
 	getChildContext() {
 		return {
 			setSystemMessage: this.setSystemMessage,
+			setSaving: () => this.setSystemMessage({type: 'info', text: t('msg.saving')}),
 			setSaved: () => this.setSystemMessage({type: 'success', text: t('msg.saved')}),
 			setAfterLogin: afterLogin => this.setState({afterLogin}),
 			getAfterLogin: () => this.state.afterLogin,
@@ -45,6 +46,7 @@ const App = React.createClass({
 
 App.childContextTypes = {
 	setSystemMessage: React.PropTypes.func,
+	setSaving: React.PropTypes.func,
 	setSaved: React.PropTypes.func,
 	setAfterLogin: React.PropTypes.func,
 	getAfterLogin: React.PropTypes.func,

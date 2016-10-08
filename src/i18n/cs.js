@@ -3,6 +3,7 @@ const label = {
 		title: 'React Frontend',
 	},
 	msg: {
+		saving: 'Ukládá se...',
 		saved: 'Uloženo.',
 		conflict: 'Data mezitím změnil jiný uživatel. Prosím obnovte si data a proveďte Vaši změnu znovu.',
 		loggedOut: 'Byl(a) jste odhlášen(a). Prosím přihlašte se znovu.',

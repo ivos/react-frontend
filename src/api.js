@@ -42,6 +42,7 @@ export const processResponse = (form, options) => response => {
 			.then(errors => convertBackendValidationErrors(convertFieldError, errors))
 			.then(messages => form.setState({messages}))
 			.then(form.refs.form.focusError)
+		form.props.setSystemMessage(null)
 		throw new Error('Backend validation error.')
 	} else if (412 === response.status) { // Precondition failed (conflict)
 		console.error('Conflict.')

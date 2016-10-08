@@ -80,6 +80,8 @@ const ProfileEditPage = React.createClass({
 	},
 
 	onSubmit() {
+		const {setSaving} = this.props
+		setSaving()
 		const {version, values, originalUsername} = this.state
 		const {username, email, name} = values
 		fetch('/api/users/' + originalUsername, {
@@ -100,10 +102,10 @@ const ProfileEditPage = React.createClass({
 
 	convertFieldError(field, fieldErrors) {
 		if ('username' === field && 'duplicate' === fieldErrors[0]) {
-			return t('register.username.msg.duplicate')
+			return t('user.username.msg.duplicate')
 		}
 		if ('email' === field && 'duplicate' === fieldErrors[0]) {
-			return t('register.email.msg.duplicate')
+			return t('user.email.msg.duplicate')
 		}
 	},
 

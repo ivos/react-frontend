@@ -19,6 +19,7 @@ const wrapPage = WrappedComponent => {
 		contextTypes: {
 			router: routerShape,
 			setSystemMessage: React.PropTypes.func,
+			setSaving: React.PropTypes.func,
 			setSaved: React.PropTypes.func,
 			setAfterLogin: React.PropTypes.func,
 			getAfterLogin: React.PropTypes.func,
@@ -26,6 +27,7 @@ const wrapPage = WrappedComponent => {
 		propTypes: {
 			router: routerShape,
 			setSystemMessage: React.PropTypes.func,
+			setSaving: React.PropTypes.func,
 			setSaved: React.PropTypes.func,
 			setAfterLogin: React.PropTypes.func,
 			getAfterLogin: React.PropTypes.func,
@@ -34,10 +36,11 @@ const wrapPage = WrappedComponent => {
 		render() {
 			const router = this.props.router || this.context.router
 			const setSystemMessage = this.props.setSystemMessage || this.context.setSystemMessage
+			const setSaving = this.props.setSaving || this.context.setSaving
 			const setSaved = this.props.setSaved || this.context.setSaved
 			const setAfterLogin = this.props.setAfterLogin || this.context.setAfterLogin
 			const getAfterLogin = this.props.getAfterLogin || this.context.getAfterLogin
-			const props = {...this.props, router, setSystemMessage, setSaved, setAfterLogin, getAfterLogin,}
+			const props = {...this.props, router, setSystemMessage, setSaving, setSaved, setAfterLogin, getAfterLogin,}
 			const title = getTitle(WrappedComponent)
 			return (
 				<DocumentTitle title={title}>

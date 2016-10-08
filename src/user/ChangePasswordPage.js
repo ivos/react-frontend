@@ -68,6 +68,8 @@ const ChangePasswordPage = React.createClass({
 	},
 
 	onSubmit() {
+		const {setSaving} = this.props
+		setSaving()
 		const {version, values} = this.state
 		const {username, email, name, password} = values
 		fetch('/api/users/' + username, {

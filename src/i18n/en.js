@@ -3,6 +3,7 @@ const label = {
 		title: 'React Frontend',
 	},
 	msg: {
+		saving: 'Saving...',
 		saved: 'Saved.',
 		conflict: 'The data was modified by another user in the meantime. Please refresh the data and apply your changes again.',
 		loggedOut: 'You have been logged out. Please log in again.',
