@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Form, TextField, CustomField} from 'react-forms-ui'
 import {Panel, Label, FormGroup, Button} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession} from '../local-storage'
@@ -50,15 +51,21 @@ const ProfileDetailPage = React.createClass({
 
 					<FormGroup>
 						<div className={buttonsClass}>
-							<Button ref="edit" href="#/profile/edit" className="spaced">
-								<span className="fa fa-edit"> </span> {t('button.edit')}
-							</Button>
-							<Button href="#/profile/change-password" className="spaced">
-								<span className="fa fa-unlock-alt"> </span> {t('button.changePassword')}
-							</Button>
-							<Button bsStyle="link" className="pull-right" href="#/">
-								<span className="fa fa-chevron-left"> </span> {t('button.back')}
-							</Button>
+							<LinkContainer to="/profile/edit">
+								<Button ref="edit" className="spaced">
+									<span className="fa fa-edit"> </span> {t('button.edit')}
+								</Button>
+							</LinkContainer>
+							<LinkContainer to="/profile/change-password">
+								<Button className="spaced">
+									<span className="fa fa-unlock-alt"> </span> {t('button.changePassword')}
+								</Button>
+							</LinkContainer>
+							<LinkContainer to="/">
+								<Button bsStyle="link" className="pull-right">
+									<span className="fa fa-chevron-left"> </span> {t('button.back')}
+								</Button>
+							</LinkContainer>
 						</div>
 					</FormGroup>
 				</Panel>

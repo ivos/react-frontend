@@ -1,5 +1,7 @@
 import React from 'react'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+import {Link} from 'react-router'
+import {LinkContainer} from 'react-router-bootstrap'
 import {getSession, loggedOut} from '../local-storage'
 import {authorizationHeader} from '../api'
 import md5 from 'md5'
@@ -44,19 +46,25 @@ const Header = ({active}, {router}) => {
 		<Navbar fixedTop fluid>
 			<Navbar.Header>
 				<Navbar.Brand>
-					<a href="#/">React Frontend</a>
+					<Link to="/">React Frontend</Link>
 				</Navbar.Brand>
 				<Navbar.Toggle />
 			</Navbar.Header>
 			<Navbar.Collapse>
 				<Nav>
-					<NavItem eventKey={1} href="#home" active={('home' === active)}>{t('home.title')}</NavItem>
+					<LinkContainer to="/home">
+						<NavItem eventKey={1} active={('home' === active)}>{t('home.title')}</NavItem>
+					</LinkContainer>
 				</Nav>
 				{!session &&
 				<Nav pullRight>
-					<NavItem eventKey={2} href="#register" active={('register' === active)}>
-						{t('register.title')}</NavItem>
-					<NavItem eventKey={3} href="#login" active={('login' === active)}>{t('login.title')}</NavItem>
+					<LinkContainer to="/register">
+						<NavItem eventKey={2} active={('register' === active)}>
+							{t('register.title')}</NavItem>
+					</LinkContainer>
+					<LinkContainer to="/login">
+						<NavItem eventKey={3} active={('login' === active)}>{t('login.title')}</NavItem>
+					</LinkContainer>
 				</Nav>
 				}
 				{session &&
@@ -71,12 +79,16 @@ const Header = ({active}, {router}) => {
 							{session.user.name}
 						</MenuItem>
 						<MenuItem divider/>
-						<MenuItem eventKey={4.2} href="#/profile">
-							<span className="fa fa-cog fa-fw"/> {t('profile.title')}
-						</MenuItem>
-						<MenuItem eventKey={4.3} href="#/profile/change-password">
-							<span className="fa fa-unlock-alt fa-fw"/> {t('changePassword.title')}
-						</MenuItem>
+						<LinkContainer to="/profile">
+							<MenuItem eventKey={4.2}>
+								<span className="fa fa-cog fa-fw"/> {t('profile.title')}
+							</MenuItem>
+						</LinkContainer>
+						<LinkContainer to="/profile/change-password">
+							<MenuItem eventKey={4.3}>
+								<span className="fa fa-unlock-alt fa-fw"/> {t('changePassword.title')}
+							</MenuItem>
+						</LinkContainer>
 						<MenuItem divider/>
 						<MenuItem eventKey={4.4} onClick={handleLogout(router)}>
 							<span className="fa fa-sign-out fa-fw"/> {t('logout.title')}

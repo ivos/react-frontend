@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form, TextField} from 'react-forms-ui'
 import {Panel, FormGroup, Button} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession, loggedIn} from '../local-storage'
@@ -47,9 +48,11 @@ const ProfileEditPage = React.createClass({
 							<Button type="submit" bsStyle="primary">
 								<span className="fa fa-check"> </span> {t('button.save')}
 							</Button>
-							<Button bsStyle="link" className="pull-right" href="#/profile">
-								<span className="fa fa-chevron-left"> </span> {t('button.back')}
-							</Button>
+							<LinkContainer to="/profile">
+								<Button bsStyle="link" className="pull-right">
+									<span className="fa fa-chevron-left"> </span> {t('button.back')}
+								</Button>
+							</LinkContainer>
 						</div>
 					</FormGroup>
 				</Panel>
