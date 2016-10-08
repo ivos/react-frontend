@@ -24,6 +24,10 @@ const ProfileDetailPage = React.createClass({
 		return {}
 	},
 
+	getPageTitle() {
+		return t('profile.title')
+	},
+
 	render() {
 		const {values = {}} = this.state
 		const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4'

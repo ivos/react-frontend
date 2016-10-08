@@ -1,4 +1,7 @@
 const label = {
+	app: {
+		title: 'React Frontend',
+	},
 	msg: {
 		saved: 'Uloženo.',
 		conflict: 'Data mezitím změnil jiný uživatel. Prosím obnovte si data a proveďte Vaši změnu znovu.',

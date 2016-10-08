@@ -1,9 +1,17 @@
 import React from 'react'
 import {routerShape} from 'react-router/lib/PropTypes'
 import hoistStatics from 'hoist-non-react-statics'
+import DocumentTitle from 'react-document-title'
+import i18n from './i18n'
+const t = i18n.t.bind(i18n)
 
 const getDisplayName = WrappedComponent => {
 	return WrappedComponent.displayName || WrappedComponent.name || 'Component'
+}
+
+const getTitle = WrappedComponent => {
+	const pageTitle = WrappedComponent.prototype.getPageTitle ? WrappedComponent.prototype.getPageTitle() : null
+	return t('app.title') + (pageTitle ? ' - ' + pageTitle : '')
 }
 
 const wrapPage = WrappedComponent => {
@@ -30,7 +38,12 @@ const wrapPage = WrappedComponent => {
 			const setAfterLogin = this.props.setAfterLogin || this.context.setAfterLogin
 			const afterLogin = this.props.afterLogin || this.context.afterLogin
 			const props = {...this.props, router, setSystemMessage, setSaved, setAfterLogin, afterLogin,}
-			return <WrappedComponent {...props} />
+			const title = getTitle(WrappedComponent)
+			return (
+				<DocumentTitle title={title}>
+					<WrappedComponent {...props} />
+				</DocumentTitle>
+			)
 		}
 	})
 

@@ -1,4 +1,7 @@
 const label = {
+	app: {
+		title: 'React Frontend',
+	},
 	msg: {
 		saved: 'Saved.',
 		conflict: 'The data was modified by another user in the meantime. Please refresh the data and apply your changes again.',
