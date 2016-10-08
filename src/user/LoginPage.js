@@ -84,9 +84,9 @@ const LoginPage = React.createClass({
 	},
 
 	handleLoggedIn(session) {
-		const {router, afterLogin, setSystemMessage} = this.props
+		const {router, getAfterLogin, setSystemMessage} = this.props
 		loggedIn(session)
-		router.push(afterLogin() || '/home')
+		router.push(getAfterLogin() || '/home')
 		setSystemMessage({type: 'success', text: t('login.msg.success')})
 	},
 })
