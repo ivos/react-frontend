@@ -3,7 +3,6 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import {Link} from 'react-router'
 import {LinkContainer} from 'react-router-bootstrap'
 import {getSession, loggedOut} from '../local-storage'
-import {authorizationHeader} from '../api'
 import md5 from 'md5'
 import './Header.css'
 import flagCs from './flag-cs.jpg'
@@ -11,21 +10,13 @@ import flagEn from './flag-en.jpg'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {storeLocale} from '../local-storage'
-
-const handleLoggedOut = router => () => {
-	loggedOut()
-	router.push('/login')
-}
+import {sessionDelete} from '../api/session'
 
 const handleLogout = router => () => {
-	fetch('/api/sessions', {
-		method: 'delete',
-		headers: authorizationHeader(),
+	sessionDelete(() => {
+		loggedOut()
+		router.push('/login')
 	})
-		.then(handleLoggedOut(router))
-		.catch(
-			err => console.error(err)
-		)
 }
 
 const setLocale = locale => event => {

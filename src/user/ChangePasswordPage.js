@@ -5,9 +5,8 @@ import {LinkBack, SaveButton} from '../ui/buttons'
 import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
-import {getSession} from '../local-storage'
-import {processResponse, jsonContentHeader, authorizationHeader, ifMatchHeader} from '../api'
 import wrapPage from '../wrapPage'
+import {userRead, userUpdate} from '../api/user'
 
 const validations = {
 	password: {
@@ -51,50 +50,25 @@ const ChangePasswordPage = React.createClass({
 
 	componentDidMount() {
 		this.setState({loading: true})
-		const {user: {username}} = getSession()
-		let version
-		fetch(`/api/users/${username}`, {
-			headers: authorizationHeader(),
-		})
-			.then(processResponse(this))
-			.then(response => {
-				version = response.headers.get('ETag')
-				return response
-			})
-			.then(response => response.json())
-			.then(values => {
+
+		userRead(this,
+			(values, version) => {
 				this.setState({version, values, loading: false})
 			})
-			.catch(
-				err => console.error(err)
-			)
 	},
 
 	onSubmit() {
-		const {setSaving} = this.props
+		const {router, setSaving, setSaved} = this.props
 		setSaving()
 		const {version, values} = this.state
 		const {username, email, name, password} = values
-		fetch('/api/users/' + username, {
-			method: 'put',
-			headers: {
-				...jsonContentHeader(),
-				...authorizationHeader(),
-				...ifMatchHeader(version),
-			},
-			body: JSON.stringify({username, email, name, password}),
-		})
-			.then(processResponse(this))
-			.then(this.handleUpdated)
-			.catch(
-				err => console.error(err)
-			)
-	},
 
-	handleUpdated() {
-		const {router, setSaved} = this.props
-		setSaved()
-		router.push('/profile')
+		userUpdate(this, username, version,
+			{username, email, name, password},
+			() => {
+				setSaved()
+				router.push('/profile')
+			})
 	},
 })
 

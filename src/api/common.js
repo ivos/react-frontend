@@ -1,6 +1,6 @@
-import {getSession, loggedOut} from './local-storage'
+import {getSession, loggedOut} from '../local-storage'
 import {Base64} from 'js-base64'
-import i18n from './i18n'
+import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 
 const convertBackendValidationErrors = (convertFieldError, errors) => {

@@ -1,11 +1,11 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
-import {processResponse, jsonContentHeader} from '../api'
 import {loggedIn} from '../local-storage'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import wrapPage from '../wrapPage'
+import {sessionCreate} from '../api/session'
 
 const validations = {
 	username: {
@@ -55,32 +55,20 @@ const LoginPage = React.createClass({
 
 	onSubmit() {
 		const {values} = this.state
-		fetch('/api/sessions', {
-			method: 'post',
-			headers: jsonContentHeader(),
-			body: JSON.stringify(values),
-		})
-			.then(this.handleResponse)
-			.then(response => response.json())
-			.then(this.handleLoggedIn)
-			.catch(
-				err => console.error(err)
-			)
-	},
-
-	handleResponse(response) {
-		if (404 === response.status) {
-			const messages = {username: [t('user.username.msg.notFound')]}
-			this.setState({messages}, this.refs.form.focusError)
-			throw new Error('User not found.')
-		}
-		return processResponse(this)(response)
+		sessionCreate(this, values,
+			this.handleUserNotFound,
+			this.handleLoggedIn)
 	},
 
 	convertFieldError(field, fieldErrors) {
 		if ('password' === field && 'invalid' === fieldErrors[0]) {
 			return t('user.password.msg.invalid')
 		}
+	},
+
+	handleUserNotFound() {
+		const messages = {username: [t('user.username.msg.notFound')]}
+		this.setState({messages}, this.refs.form.focusError)
 	},
 
 	handleLoggedIn(session) {

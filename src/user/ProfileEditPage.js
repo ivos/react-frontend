@@ -6,8 +6,8 @@ import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession, loggedIn} from '../local-storage'
-import {processResponse, jsonContentHeader, authorizationHeader, ifMatchHeader} from '../api'
 import wrapPage from '../wrapPage'
+import {userRead, userUpdate} from '../api/user'
 
 const validations = {
 	username: {
@@ -62,24 +62,12 @@ const ProfileEditPage = React.createClass({
 
 	componentDidMount() {
 		this.setState({loading: true})
-		const {user: {username}} = getSession()
-		let version
-		fetch(`/api/users/${username}`, {
-			headers: authorizationHeader(),
-		})
-			.then(processResponse(this))
-			.then(response => {
-				version = response.headers.get('ETag')
-				return response
-			})
-			.then(response => response.json())
-			.then(values => {
+
+		userRead(this,
+			(values, version) => {
 				const {username} = values
 				this.setState({version, values, originalUsername: username, loading: false})
 			})
-			.catch(
-				err => console.error(err)
-			)
 	},
 
 	onSubmit() {
@@ -87,20 +75,10 @@ const ProfileEditPage = React.createClass({
 		setSaving()
 		const {version, values, originalUsername} = this.state
 		const {username, email, name} = values
-		fetch('/api/users/' + originalUsername, {
-			method: 'put',
-			headers: {
-				...jsonContentHeader(),
-				...authorizationHeader(),
-				...ifMatchHeader(version),
-			},
-			body: JSON.stringify({username, email, name}),
-		})
-			.then(processResponse(this))
-			.then(this.handleUpdated)
-			.catch(
-				err => console.error(err)
-			)
+
+		userUpdate(this, originalUsername, version,
+			{username, email, name},
+			this.handleUpdated)
 	},
 
 	convertFieldError(field, fieldErrors) {

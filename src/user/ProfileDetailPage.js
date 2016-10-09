@@ -7,9 +7,8 @@ import {LinkBack} from '../ui/buttons'
 import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
-import {getSession} from '../local-storage'
-import {processResponse, authorizationHeader} from '../api'
 import wrapPage from '../wrapPage'
+import {userRead} from '../api/user'
 
 const statusStyle = status => {
 	switch (status) {
@@ -80,18 +79,10 @@ const ProfileDetailPage = React.createClass({
 		this.setState({loading: true})
 		ReactDOM.findDOMNode(this.refs.edit).focus()
 
-		const {user: {username}} = getSession()
-		fetch(`/api/users/${username}`, {
-			headers: authorizationHeader(),
-		})
-			.then(processResponse(this))
-			.then(response => response.json())
-			.then(values => {
+		userRead(this,
+			values => {
 				this.setState({values, loading: false})
 			})
-			.catch(
-				err => console.error(err)
-			)
 	},
 })
 
