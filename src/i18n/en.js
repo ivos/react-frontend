@@ -76,7 +76,7 @@ const label = {
 		title: 'My profile',
 	},
 	editProfile: {
-		title: 'Edit my profile',
+		title: 'Edit profile',
 	},
 	changePassword: {
 		title: 'Change password',

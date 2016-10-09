@@ -11,7 +11,7 @@ const getDisplayName = WrappedComponent => {
 
 const getTitle = WrappedComponent => {
 	const pageTitle = WrappedComponent.prototype.getPageTitle ? WrappedComponent.prototype.getPageTitle() : null
-	return t('app.title') + (pageTitle ? ' - ' + pageTitle : '')
+	return (pageTitle ? pageTitle + ' - ' : '') + t('app.title')
 }
 
 const wrapPage = WrappedComponent => {
