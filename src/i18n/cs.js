@@ -13,6 +13,7 @@ const label = {
 	button: {
 		register: 'Zaregistrovat se',
 		login: 'Přihlásit se',
+		create: 'Vytvořit',
 		edit: 'Editovat',
 		save: 'Uložit',
 		back: 'Zpět',
@@ -57,6 +58,29 @@ const label = {
 			},
 		},
 	},
+	project: {
+		code: {
+			label: 'Kód',
+			msg: {
+				duplicate: 'Projekt s tímto kódem již máte vytvořen.',
+			},
+		},
+		name: 'Jméno',
+		visibility: {
+			label: 'Viditelnost',
+			values: {
+				public: 'Veřejný',
+				private: 'Soukromý',
+			},
+		},
+		description: 'Popis',
+		start: 'Začátek',
+		duration: 'Trvání',
+		budget: 'Rozpočet',
+		dailyMeetingAt: 'Denní schůzka v',
+		kickOff: 'Zahájení',
+		created: 'Vytvořeno',
+	},
 	home: {
 		title: 'Úvod',
 	},
@@ -80,6 +104,18 @@ const label = {
 	},
 	changePassword: {
 		title: 'Změna hesla',
+	},
+	projectList: {
+		title: 'Projekty',
+	},
+	projectDetail: {
+		title: 'Projekt',
+	},
+	projectCreate: {
+		title: 'Nový projekt',
+	},
+	projectEdit: {
+		title: 'Editace projektu',
 	},
 }
 

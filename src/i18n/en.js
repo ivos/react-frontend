@@ -13,6 +13,7 @@ const label = {
 	button: {
 		register: 'Register',
 		login: 'Login',
+		create: 'Create',
 		edit: 'Edit',
 		save: 'Save',
 		back: 'Back',
@@ -57,6 +58,29 @@ const label = {
 			},
 		},
 	},
+	project: {
+		code: {
+			label: 'Code',
+			msg: {
+				duplicate: 'You already have a project with this code.',
+			},
+		},
+		name: 'Name',
+		visibility: {
+			label: 'Visibility',
+			values: {
+				public: 'Public',
+				private: 'Private',
+			},
+		},
+		description: 'Description',
+		start: 'Start',
+		duration: 'Duration',
+		budget: 'Budget',
+		dailyMeetingAt: 'Daily meeting at',
+		kickOff: 'Kick-off',
+		created: 'Created',
+	},
 	home: {
 		title: 'Home',
 	},
@@ -80,6 +104,18 @@ const label = {
 	},
 	changePassword: {
 		title: 'Change password',
+	},
+	projectList: {
+		title: 'Projects',
+	},
+	projectDetail: {
+		title: 'Project',
+	},
+	projectCreate: {
+		title: 'New project',
+	},
+	projectEdit: {
+		title: 'Edit project',
 	},
 }
 

@@ -46,56 +46,59 @@ const Header = ({active}, {router}) => {
 					<LinkContainer to="/home">
 						<NavItem eventKey={1} active={('home' === active)}>{t('home.title')}</NavItem>
 					</LinkContainer>
+					<LinkContainer to="/projects">
+						<NavItem eventKey={2} active={('project' === active)}>{t('projectList.title')}</NavItem>
+					</LinkContainer>
 				</Nav>
 				{!session &&
 				<Nav pullRight>
 					<LinkContainer to="/register">
-						<NavItem eventKey={2} active={('register' === active)}>
+						<NavItem eventKey={100} active={('register' === active)}>
 							{t('register.title')}</NavItem>
 					</LinkContainer>
 					<LinkContainer to="/login">
-						<NavItem eventKey={3} active={('login' === active)}>{t('login.title')}</NavItem>
+						<NavItem eventKey={101} active={('login' === active)}>{t('login.title')}</NavItem>
 					</LinkContainer>
 				</Nav>
 				}
 				{session &&
 				<Nav pullRight>
-					<NavDropdown eventKey={4} id="nav-logged-in-user-dropdown" title={
+					<NavDropdown eventKey={200} id="nav-logged-in-user-dropdown" title={
 						<img src={`//www.gravatar.com/avatar/${md5(session.user.email)}?s=30&d=mm`} className="gravatar"
 						     alt="User gravatar"/>
 					}>
-						<MenuItem eventKey={4.1} disabled>
+						<MenuItem eventKey={200.1} disabled>
 							<span className="fa fa-user fa-fw"/>
 							{' '}
 							{session.user.name}
 						</MenuItem>
 						<MenuItem divider/>
 						<LinkContainer to="/profile">
-							<MenuItem eventKey={4.2}>
+							<MenuItem eventKey={200.2}>
 								<span className="fa fa-cog fa-fw"/> {t('profile.title')}
 							</MenuItem>
 						</LinkContainer>
 						<LinkContainer to="/profile/change-password">
-							<MenuItem eventKey={4.3}>
+							<MenuItem eventKey={200.3}>
 								<span className="fa fa-unlock-alt fa-fw"/> {t('changePassword.title')}
 							</MenuItem>
 						</LinkContainer>
 						<MenuItem divider/>
-						<MenuItem eventKey={4.4} onClick={handleLogout(router)}>
+						<MenuItem eventKey={200.4} onClick={handleLogout(router)}>
 							<span className="fa fa-sign-out fa-fw"/> {t('logout.title')}
 						</MenuItem>
 					</NavDropdown>
 				</Nav>
 				}
 				<Nav pullRight>
-					<NavDropdown eventKey={5} title={currentLocaleLabel} id="nav-language-dropdown">
+					<NavDropdown eventKey={210} title={currentLocaleLabel} id="nav-language-dropdown">
 						{'en' !== locale &&
-						<MenuItem eventKey={5.1} onClick={setLocale('en')}>
+						<MenuItem eventKey={210.1} onClick={setLocale('en')}>
 							{localeLabels.en}
 						</MenuItem>
 						}
 						{'cs' !== locale &&
-						<MenuItem eventKey={5.1} onClick={setLocale('cs')}>
+						<MenuItem eventKey={210.1} onClick={setLocale('cs')}>
 							{localeLabels.cs}
 						</MenuItem>
 						}

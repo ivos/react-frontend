@@ -29,8 +29,7 @@ const ProfileDetailPage = React.createClass({
 	},
 
 	render() {
-		const {loading} = this.state
-		const {values = {}} = this.state
+		const {loading, values = {}} = this.state
 		const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4'
 		const buttonsClass = 'col-sm-offset-2 col-sm-10'
 		return (

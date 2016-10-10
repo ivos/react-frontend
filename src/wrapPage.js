@@ -9,8 +9,9 @@ const getDisplayName = WrappedComponent => {
 	return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
 
-const getTitle = WrappedComponent => {
-	const pageTitle = WrappedComponent.prototype.getPageTitle ? WrappedComponent.prototype.getPageTitle() : null
+const getTitle = (self, WrappedComponent) => {
+	const pageTitle = WrappedComponent.prototype.getPageTitle ?
+		WrappedComponent.prototype.getPageTitle.bind(self)() : null
 	return (pageTitle ? pageTitle + ' - ' : '') + t('app.title')
 }
 
@@ -41,7 +42,7 @@ const wrapPage = WrappedComponent => {
 			const setAfterLogin = this.props.setAfterLogin || this.context.setAfterLogin
 			const getAfterLogin = this.props.getAfterLogin || this.context.getAfterLogin
 			const props = {...this.props, router, setSystemMessage, setSaving, setSaved, setAfterLogin, getAfterLogin,}
-			const title = getTitle(WrappedComponent)
+			const title = getTitle(this, WrappedComponent)
 			return (
 				<DocumentTitle title={title}>
 					<WrappedComponent {...props} />

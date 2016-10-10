@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, TextField} from 'react-forms-ui'
+import {Form, TextField, FormMessages} from 'react-forms-ui'
 import {Panel, FormGroup} from 'react-bootstrap'
 import {LinkBack, SaveButton} from '../ui/buttons'
 import Loading from '../ui/Loading'
@@ -55,6 +55,8 @@ const ProfileEditPage = React.createClass({
 							<LinkBack to="/profile"/>
 						</div>
 					</FormGroup>
+
+					<FormMessages className={buttonsClass}/>
 				</Panel>
 			</Form>
 		)
@@ -66,7 +68,7 @@ const ProfileEditPage = React.createClass({
 		userRead(this,
 			(values, version) => {
 				const {username} = values
-				this.setState({version, values, originalUsername: username, loading: false})
+				this.setState({values, version, originalUsername: username, loading: false})
 			})
 	},
 
