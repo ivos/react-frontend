@@ -2,14 +2,13 @@ import React from 'react'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import {Link} from 'react-router'
 import {LinkContainer} from 'react-router-bootstrap'
-import {getSession, loggedOut} from '../local-storage'
+import {storeLocale, getSession, loggedOut} from '../local-storage'
 import md5 from 'md5'
 import './Header.css'
 import flagCs from './flag-cs.jpg'
 import flagEn from './flag-en.jpg'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
-import {storeLocale} from '../local-storage'
 import {sessionDelete} from '../api/session'
 
 const handleLogout = router => () => {
@@ -27,6 +26,7 @@ const setLocale = locale => event => {
 
 const Header = ({active}, {router}) => {
 	const session = getSession()
+	const roles = session ? session.user.roles.split(',') : []
 	const locale = i18n.language
 	const localeLabels = {
 		en: <span><img src={flagEn} height="14" width="23" alt="English"/> English</span>,
@@ -46,9 +46,11 @@ const Header = ({active}, {router}) => {
 					<LinkContainer to="/home">
 						<NavItem eventKey={1} active={('home' === active)}>{t('home.title')}</NavItem>
 					</LinkContainer>
+					{roles.includes('user') &&
 					<LinkContainer to="/projects">
 						<NavItem eventKey={2} active={('project' === active)}>{t('projectList.title')}</NavItem>
 					</LinkContainer>
+					}
 				</Nav>
 				{!session &&
 				<Nav pullRight>
