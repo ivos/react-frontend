@@ -93,7 +93,7 @@ const RegisterPage = React.createClass({
 	handleLoggedIn(session) {
 		const {router} = this.props
 		loggedIn(session)
-		router.push('/home')
+		router.push('/')
 	},
 })
 

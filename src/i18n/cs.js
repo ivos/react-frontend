@@ -83,6 +83,9 @@ const label = {
 	},
 	home: {
 		title: 'Úvod',
+		welcome: 'Vítá Vás aplikace React Frontend.',
+		loggedInAs: 'Přihlásil(a) jste se jako uživatel',
+		logIn: 'Prosím přihlašte se.',
 	},
 	register: {
 		title: 'Registrace',

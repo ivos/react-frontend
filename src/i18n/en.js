@@ -83,6 +83,9 @@ const label = {
 	},
 	home: {
 		title: 'Home',
+		welcome: 'Welcome to React Frontend application.',
+		loggedInAs: 'You have logged in as user',
+		logIn: 'Please log in.',
 	},
 	register: {
 		title: 'Register',

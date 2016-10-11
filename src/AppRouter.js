@@ -1,7 +1,9 @@
 import React from 'react'
-import {Router, Route, Redirect, useRouterHistory} from 'react-router'
+import {Router, Route, IndexRoute, Redirect, useRouterHistory} from 'react-router'
 import {createHashHistory} from 'history'
 import App from './layout/App'
+
+import HomePage from './home/HomePage'
 
 import RegisterPage from './user/RegisterPage'
 import LoginPage from './user/LoginPage'
@@ -18,6 +20,8 @@ const history = useRouterHistory(createHashHistory)({queryKey: false})
 const AppRouter = () => (
 	<Router history={history}>
 		<Route path="/" component={App}>
+			<IndexRoute component={HomePage}/>
+
 			<Route path="/register" component={RegisterPage}/>
 			<Route path="/login" component={LoginPage}/>
 			<Route path="/profile" component={ProfileDetailPage}/>

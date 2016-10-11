@@ -36,7 +36,7 @@ const App = React.createClass({
 		const active = pathname.split('/')[1] || 'home'
 		return (
 			<Grid fluid>
-				<Header active={active}/>
+				<Header active={active} pathname={pathname}/>
 				<SystemMessage ref="msg" message={systemMessage}/>
 				<div>{children}</div>
 			</Grid>

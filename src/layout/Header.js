@@ -24,7 +24,7 @@ const setLocale = locale => event => {
 	window.location.reload()
 }
 
-const Header = ({active}, {router}) => {
+const Header = ({active, pathname}, {router}) => {
 	const session = getSession()
 	const roles = session ? session.user.roles.split(',') : []
 	const locale = i18n.language
@@ -43,13 +43,15 @@ const Header = ({active}, {router}) => {
 			</Navbar.Header>
 			<Navbar.Collapse>
 				<Nav>
-					<LinkContainer to="/home">
-						<NavItem eventKey={1} active={('home' === active)}>{t('home.title')}</NavItem>
-					</LinkContainer>
+					{session &&
+					<NavItem eventKey={1} active={'home' === active} href="#/">
+						{t('home.title')}
+					</NavItem>
+					}
 					{roles.includes('user') &&
-					<LinkContainer to="/projects">
-						<NavItem eventKey={2} active={('project' === active)}>{t('projectList.title')}</NavItem>
-					</LinkContainer>
+					<NavItem eventKey={2} active={'projects' === active} href="#/projects">
+						{t('projectList.title')}
+					</NavItem>
 					}
 				</Nav>
 				{!session &&
@@ -76,12 +78,12 @@ const Header = ({active}, {router}) => {
 						</MenuItem>
 						<MenuItem divider/>
 						<LinkContainer to="/profile">
-							<MenuItem eventKey={200.2}>
+							<MenuItem eventKey={200.2} active={'/profile' === pathname}>
 								<span className="fa fa-cog fa-fw"/> {t('profile.title')}
 							</MenuItem>
 						</LinkContainer>
 						<LinkContainer to="/profile/change-password">
-							<MenuItem eventKey={200.3}>
+							<MenuItem eventKey={200.3} active={'/profile/change-password' === pathname}>
 								<span className="fa fa-unlock-alt fa-fw"/> {t('changePassword.title')}
 							</MenuItem>
 						</LinkContainer>
