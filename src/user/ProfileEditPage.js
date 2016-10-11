@@ -7,7 +7,7 @@ import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import {getSession, loggedIn} from '../local-storage'
 import wrapPage from '../wrapPage'
-import {userRead, userUpdate} from '../api/user'
+import {userReadCurrent, userUpdate} from '../api/user'
 
 const validations = {
 	username: {
@@ -65,7 +65,7 @@ const ProfileEditPage = React.createClass({
 	componentDidMount() {
 		this.setState({loading: true})
 
-		userRead(this,
+		userReadCurrent(this,
 			(values, version) => {
 				const {username} = values
 				this.setState({values, version, originalUsername: username, loading: false})

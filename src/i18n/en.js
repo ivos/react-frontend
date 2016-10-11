@@ -18,6 +18,8 @@ const label = {
 		save: 'Save',
 		back: 'Back',
 		changePassword: 'Change password',
+		disable: 'Disable',
+		activate: 'Activate',
 	},
 	user: {
 		username: {
@@ -107,6 +109,12 @@ const label = {
 	},
 	changePassword: {
 		title: 'Change password',
+	},
+	userList: {
+		title: 'Users',
+	},
+	userDetail: {
+		title: 'User',
 	},
 	projectList: {
 		title: 'Projects',

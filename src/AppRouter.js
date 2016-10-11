@@ -11,6 +11,9 @@ import ProfileDetailPage from './user/ProfileDetailPage'
 import ProfileEditPage from './user/ProfileEditPage'
 import ChangePasswordPage from './user/ChangePasswordPage'
 
+import UserListPage from './user/UserListPage'
+import UserDetailPage from './user/UserDetailPage'
+
 import ProjectListPage from './project/ProjectListPage'
 import ProjectDetailPage from './project/ProjectDetailPage'
 import ProjectEditPage from './project/ProjectEditPage'
@@ -27,6 +30,9 @@ const AppRouter = () => (
 			<Route path="/profile" component={ProfileDetailPage}/>
 			<Route path="/profile/edit" component={ProfileEditPage}/>
 			<Route path="/profile/change-password" component={ChangePasswordPage}/>
+
+			<Route path="/users" component={UserListPage}/>
+			<Route path="/users/:username" component={UserDetailPage}/>
 
 			<Route path="/projects" component={ProjectListPage}/>
 			<Route path="/projects/new" component={ProjectEditPage}/>

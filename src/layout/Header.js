@@ -53,6 +53,11 @@ const Header = ({active, pathname}, {router}) => {
 						{t('projectList.title')}
 					</NavItem>
 					}
+					{roles.includes('admin') &&
+					<NavItem eventKey={3} active={'users' === active} href="#/users">
+						{t('userList.title')}
+					</NavItem>
+					}
 				</Nav>
 				{!session &&
 				<Nav pullRight>

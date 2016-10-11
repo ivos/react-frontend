@@ -36,10 +36,12 @@ const ProjectDetailPage = React.createClass({
 		const buttonsClass = 'col-sm-offset-2 col-sm-10'
 		return (
 			<Form state={this.state} setState={this.setState.bind(this)}>
-				<Panel header={<h3>
-					<span className="text-muted">{t('projectDetail.title')}</span> <strong>{values.name}</strong>
-					<Loading loading={loading}/>
-				</h3>}>
+				<Panel header={
+					<h3>
+						<span className="text-muted">{t('projectDetail.title')}</span> <strong>{values.name}</strong>
+						<Loading loading={loading}/>
+					</h3>
+				}>
 					<TextField id="name" label={t('project.name')} classes={fieldClasses} readonly/>
 					<CustomField id="code" label={t('project.code.label')} classes={fieldClasses} readonly>
 						<code>{values.code}</code>

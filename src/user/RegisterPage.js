@@ -91,9 +91,10 @@ const RegisterPage = React.createClass({
 	},
 
 	handleLoggedIn(session) {
-		const {router} = this.props
+		const {router, setSystemMessage} = this.props
 		loggedIn(session)
 		router.push('/')
+		setSystemMessage({type: 'success', text: t('login.msg.success')})
 	},
 })
 

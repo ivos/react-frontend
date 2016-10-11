@@ -18,6 +18,8 @@ const label = {
 		save: 'Uložit',
 		back: 'Zpět',
 		changePassword: 'Změnit heslo',
+		disable: 'Zrušit',
+		activate: 'Aktivovat',
 	},
 	user: {
 		username: {
@@ -107,6 +109,12 @@ const label = {
 	},
 	changePassword: {
 		title: 'Změna hesla',
+	},
+	userList: {
+		title: 'Uživatelé',
+	},
+	userDetail: {
+		title: 'Uživatel',
 	},
 	projectList: {
 		title: 'Projekty',

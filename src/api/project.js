@@ -1,9 +1,7 @@
 import {processResponse, jsonContentHeader, authorizationHeader, ifMatchHeader} from './common'
 
 export const projectList = (form, params, handler) => {
-	const url = new URL('http://localhost:3000/api/projects')
-	Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-	fetch(url, {
+	fetch('/api/projects', {
 		headers: authorizationHeader(),
 	})
 		.then(processResponse(form))

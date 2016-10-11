@@ -6,7 +6,7 @@ import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import wrapPage from '../wrapPage'
-import {userRead, userUpdate} from '../api/user'
+import {userReadCurrent, userUpdate} from '../api/user'
 
 const validations = {
 	password: {
@@ -51,7 +51,7 @@ const ChangePasswordPage = React.createClass({
 	componentDidMount() {
 		this.setState({loading: true})
 
-		userRead(this,
+		userReadCurrent(this,
 			(values, version) => {
 				this.setState({version, values, loading: false})
 			})

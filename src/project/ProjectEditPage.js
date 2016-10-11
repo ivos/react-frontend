@@ -83,7 +83,6 @@ const ProjectEditPage = React.createClass({
 		const {params: {code}} = this.props
 		if (code) {
 			this.setState({loading: true})
-
 			projectRead(this, code,
 				(values, version) => {
 					this.setState({values, version, originalCode: code, loading: false})
