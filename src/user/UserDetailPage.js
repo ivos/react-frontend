@@ -6,7 +6,8 @@ import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import wrapPage from '../wrapPage'
-import {userRead, userDisable, userActivate} from '../api/user'
+import {loggedIn} from '../local-storage'
+import {userRead, userDisable, userActivate, userSwitchTo} from '../api/user'
 import UserDetail from './UserDetail'
 
 const UserDetailPage = React.createClass({
@@ -41,6 +42,10 @@ const UserDetailPage = React.createClass({
 							        disabled={'disabled' !== values.status}>
 								<span className="fa fa-check"> </span> {t('button.activate')}
 							</Button>
+							<Button className="spaced" onClick={this.handleSwitchTo}
+							        disabled={'active' !== values.status}>
+								<span className="fa fa-sign-in"> </span> {t('button.switchTo')}
+							</Button>
 							<LinkBack to="/users"/>
 						</div>
 					</FormGroup>
@@ -69,13 +74,24 @@ const UserDetailPage = React.createClass({
 		return () => {
 			const {setSaving, setSaved} = this.props
 			setSaving()
-			const {values:{username}, version} = this.state
+			const {values: {username}, version} = this.state
 			api(this, username, version,
 				() => {
 					setSaved()
 					this.reload()
 				})
 		}
+	},
+
+	handleSwitchTo() {
+		const {router, setSystemMessage} = this.props
+		const {values: {username}} = this.state
+		userSwitchTo(this, username,
+			session => {
+				loggedIn(session)
+				router.push('/')
+				setSystemMessage({type: 'success', text: t('login.msg.success')})
+			})
 	},
 })
 

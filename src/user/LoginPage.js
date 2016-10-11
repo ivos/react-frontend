@@ -1,10 +1,10 @@
 import React from 'react'
 import {Form, FormMessages, TextField, PasswordField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, HelpBlock} from 'react-bootstrap'
-import {loggedIn} from '../local-storage'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import wrapPage from '../wrapPage'
+import {loggedIn} from '../local-storage'
 import {sessionCreate} from '../api/session'
 
 const validations = {

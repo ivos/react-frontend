@@ -94,3 +94,16 @@ export const userActivate = (form, username, version, handler) => {
 			err => console.error(err)
 		)
 }
+
+export const userSwitchTo = (form, username, handler) => {
+	fetch(`/api/users/${username}/actions/switch-to`, {
+		method: 'post',
+		headers: authorizationHeader(),
+	})
+		.then(processResponse(form))
+		.then(response => response.json())
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}

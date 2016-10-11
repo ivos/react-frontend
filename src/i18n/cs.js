@@ -20,6 +20,7 @@ const label = {
 		changePassword: 'Změnit heslo',
 		disable: 'Zrušit',
 		activate: 'Aktivovat',
+		switchTo: 'Přepnout do',
 	},
 	user: {
 		msg: {

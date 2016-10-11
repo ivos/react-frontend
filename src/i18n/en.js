@@ -20,6 +20,7 @@ const label = {
 		changePassword: 'Change password',
 		disable: 'Disable',
 		activate: 'Activate',
+		switchTo: 'Switch to',
 	},
 	user: {
 		msg: {
