@@ -1,7 +1,7 @@
 import React from 'react'
 import i18n from '../i18n'
 import {Form, TextField, DateField, NumberField, FormMessages} from 'react-forms-ui'
-import {Panel, FormGroup} from 'react-bootstrap'
+import {Panel, FormGroup, HelpBlock} from 'react-bootstrap'
 import {LinkBack, SaveButton} from '../ui/buttons'
 import Loading from '../ui/Loading'
 const t = i18n.t.bind(i18n)
@@ -59,7 +59,9 @@ const ProjectEditPage = React.createClass({
 					<Loading loading={loading}/>
 				</h3>}>
 					<TextField id="name" label={t('project.name')} classes={fieldClasses}/>
-					<TextField id="code" label={t('project.code.label')} classes={fieldClasses}/>
+					<TextField id="code" label={t('project.code.label')} classes={fieldClasses}>
+						<HelpBlock>{t('project.code.help')}</HelpBlock>
+					</TextField>
 					<TextField id="visibility" label={t('project.visibility.label')} classes={fieldClasses}/>
 					<TextField id="description" label={t('project.description')} classes={fieldClasses}/>
 					<DateField id="start" label={t('project.start')} classes={fieldClasses}/>

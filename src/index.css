@@ -8,3 +8,7 @@ body {
 .spaced {
     margin-right: 5px;
 }
+
+.wide-spaced {
+    margin-right: 20px;
+}

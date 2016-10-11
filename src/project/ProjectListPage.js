@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Form} from 'react-forms-ui'
-import {Panel, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
+import {Panel, ListGroup, ListGroupItem, Button, Label} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import wrapPage from '../wrapPage'
 import {projectList} from '../api/project'
+import {visibilityStyle} from './ProjectDetailPage'
 
 const ProjectListPage = React.createClass({
 	getInitialState() {
@@ -28,8 +29,10 @@ const ProjectListPage = React.createClass({
 							return (
 								<LinkContainer key={model.uri} to={`/projects/${model.code}`}>
 									<ListGroupItem ref={`item${index}`} className="list-group-item">
-										<span style={{marginRight: 20}}>{model.name}</span>
-										<code>{model.code}</code>
+										<span className="wide-spaced">{model.name}</span>
+										<code className="wide-spaced">{model.code}</code>
+										<Label bsStyle={visibilityStyle(model.visibility)}>
+											{t('project.visibility.values.' + model.visibility)}</Label>
 									</ListGroupItem>
 								</LinkContainer>
 							)

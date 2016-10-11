@@ -66,6 +66,7 @@ const label = {
 	project: {
 		code: {
 			label: 'Code',
+			help: 'Only lower-case letters, numbers and underscores.',
 			msg: {
 				duplicate: 'You already have a project with this code.',
 			},

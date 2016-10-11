@@ -66,6 +66,7 @@ const label = {
 	project: {
 		code: {
 			label: 'Kód',
+			help: 'Pouze malá písmena bez háčků a čárek, číslice a podtržítka.',
 			msg: {
 				duplicate: 'Projekt s tímto kódem již máte vytvořen.',
 			},

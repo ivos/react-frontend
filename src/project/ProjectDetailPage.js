@@ -11,12 +11,14 @@ import wrapPage from '../wrapPage'
 import {projectRead} from '../api/project'
 import moment from 'moment'
 
-const visibilityStyle = visibility => {
+export const visibilityStyle = visibility => {
 	switch (visibility) {
 		case 'private':
 			return 'primary'
-		default:
+		 case 'public':
 			return 'success'
+		default:
+			return null
 	}
 }
 
@@ -62,7 +64,7 @@ const ProjectDetailPage = React.createClass({
 						{values.kickOff && moment(values.kickOff).format('l, LTS')}
 					</CustomField>
 					<CustomField id="created" label={t('project.created')} classes={fieldClasses} readonly>
-						{moment(values.created).format('l, LTS.SSS')}
+						{values.created && moment(values.created).format('l, LTS.SSS')}
 					</CustomField>
 
 					<FormGroup>
