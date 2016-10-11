@@ -22,6 +22,9 @@ const label = {
 		activate: 'Aktivovat',
 	},
 	user: {
+		msg: {
+			invalid: 'Neplatný uživatel.',
+		},
 		username: {
 			label: 'Uživatelské jméno',
 			help: 'Pouze malá písmena bez háčků a čárek, číslice a podtržítka.',

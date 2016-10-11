@@ -60,8 +60,11 @@ const LoginPage = React.createClass({
 			this.handleLoggedIn)
 	},
 
-	convertFieldError(field, fieldErrors) {
-		if ('password' === field && 'invalid' === fieldErrors[0]) {
+	convertFieldError(field, fieldError) {
+		if ('user' === field && 'invalid' === fieldError[0]) {
+			return {_form: t('user.msg.invalid')}
+		}
+		if ('password' === field && 'invalid' === fieldError[0]) {
 			return t('user.password.msg.invalid')
 		}
 	},

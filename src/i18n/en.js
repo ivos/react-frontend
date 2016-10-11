@@ -22,6 +22,9 @@ const label = {
 		activate: 'Activate',
 	},
 	user: {
+		msg: {
+			invalid: 'Invalid user.',
+		},
 		username: {
 			label: 'Username',
 			help: 'Only lower-case letters, numbers and underscores.',

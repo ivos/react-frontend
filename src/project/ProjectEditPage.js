@@ -109,8 +109,8 @@ const ProjectEditPage = React.createClass({
 		}
 	},
 
-	convertFieldError(field, fieldErrors) {
-		if ('code' === field && 'duplicate' === fieldErrors[0]) {
+	convertFieldError(field, fieldError) {
+		if ('code' === field && 'duplicate' === fieldError[0]) {
 			return t('project.code.msg.duplicate')
 		}
 	},

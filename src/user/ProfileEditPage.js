@@ -83,11 +83,11 @@ const ProfileEditPage = React.createClass({
 			this.handleUpdated)
 	},
 
-	convertFieldError(field, fieldErrors) {
-		if ('username' === field && 'duplicate' === fieldErrors[0]) {
+	convertFieldError(field, fieldError) {
+		if ('username' === field && 'duplicate' === fieldError[0]) {
 			return t('user.username.msg.duplicate')
 		}
-		if ('email' === field && 'duplicate' === fieldErrors[0]) {
+		if ('email' === field && 'duplicate' === fieldError[0]) {
 			return t('user.email.msg.duplicate')
 		}
 	},

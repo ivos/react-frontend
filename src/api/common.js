@@ -4,11 +4,28 @@ import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 
 const convertBackendValidationErrors = (convertFieldError, errors) => {
-	return Object.keys(errors).reduce((previous, current) => {
-		const fieldErrors = errors[current]
-		previous[current] = fieldErrors.map(
-			fieldError => convertFieldError(current, fieldError) || 'Invalid value.'
+	return Object.keys(errors).reduce((previous, field) => {
+		const fieldErrors = errors[field]
+		const mappedErrors = fieldErrors.map(
+			fieldError => {
+				const convertedError = convertFieldError(field, fieldError) || 'Invalid value.'
+				if (typeof convertedError === 'string') {
+					const mapped = {}
+					mapped[field] = convertedError
+					return mapped
+				}
+				return convertedError
+			}
 		)
+		mappedErrors.forEach(mappedError => {
+			Object.keys(mappedError).forEach(mappedField => {
+				if (!previous[mappedField]) {
+					previous[mappedField] = [mappedError[mappedField]]
+				} else {
+					previous[mappedField].push(mappedError[mappedField])
+				}
+			})
+		})
 		return previous
 	}, {})
 }
