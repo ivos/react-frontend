@@ -5,6 +5,12 @@ body {
     padding-top: 70px;
 }
 
+/* Fix bootstrap */
+.help-block {
+    margin-bottom: 0;
+}
+
+/* Custom classes */
 .spaced {
     margin-right: 5px;
 }

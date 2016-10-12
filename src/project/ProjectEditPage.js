@@ -1,6 +1,6 @@
 import React from 'react'
 import i18n from '../i18n'
-import {Form, TextField, DateField, NumberField, FormMessages} from 'react-forms-ui'
+import {Form, TextField, DateField, NumberField, RadiosField, FormMessages} from 'react-forms-ui'
 import {Panel, FormGroup, HelpBlock} from 'react-bootstrap'
 import {LinkBack, SaveButton} from '../ui/buttons'
 import Loading from '../ui/Loading'
@@ -62,7 +62,8 @@ const ProjectEditPage = React.createClass({
 					<TextField id="code" label={t('project.code.label')} classes={fieldClasses}>
 						<HelpBlock>{t('project.code.help')}</HelpBlock>
 					</TextField>
-					<TextField id="visibility" label={t('project.visibility.label')} classes={fieldClasses}/>
+					<RadiosField id="visibility" label={t('project.visibility.label')} classes={fieldClasses}
+					             data={t('project.visibility.values', {returnObjects: true})}/>
 					<TextField id="description" label={t('project.description')} classes={fieldClasses}/>
 					<DateField id="start" label={t('project.start')} classes={fieldClasses}/>
 					<NumberField id="duration" label={t('project.duration')} classes={fieldClasses}/>
