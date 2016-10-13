@@ -1,84 +1,16 @@
-import {processResponse, acceptJsonHeader, jsonContentHeader, authorizationHeader, ifMatchHeader} from './common'
+import {list, read, create, update, delete_} from './common'
 
-export const projectList = (form, params, handler) => {
-	fetch('/api/projects', {
-		headers: {
-			...acceptJsonHeader(),
-			...authorizationHeader(),
-		},
-	})
-		.then(processResponse(form))
-		.then(response => response.json())
-		.then(handler)
-		.catch(
-			err => console.error(err)
-		)
-}
+export const projectList = (form, params, handler) =>
+	list('/api/projects', form, params, handler)
 
-export const projectRead = (form, code, handler) => {
-	let version
-	fetch(`/api/projects/${code}`, {
-		headers: {
-			...acceptJsonHeader(),
-			...authorizationHeader(),
-		},
-	})
-		.then(processResponse(form))
-		.then(response => {
-			version = response.headers.get('ETag')
-			return response
-		})
-		.then(response => response.json())
-		.then(values => handler(values, version))
-		.catch(
-			err => console.error(err)
-		)
-}
+export const projectRead = (form, code, handler) =>
+	read(`/api/projects/${code}`, form, handler)
 
-export const projectCreate = (form, values, handler) => {
-	fetch(`/api/projects`, {
-		method: 'post',
-		headers: {
-			...jsonContentHeader(),
-			...authorizationHeader(),
-		},
-		body: JSON.stringify(values),
-	})
-		.then(processResponse(form))
-		.then(handler)
-		.catch(
-			err => console.error(err)
-		)
-}
+export const projectCreate = (form, values, handler) =>
+	create(`/api/projects`, form, values, handler)
 
-export const projectUpdate = (form, code, version, values, handler) => {
-	fetch(`/api/projects/${code}`, {
-		method: 'put',
-		headers: {
-			...jsonContentHeader(),
-			...authorizationHeader(),
-			...ifMatchHeader(version),
-		},
-		body: JSON.stringify(values),
-	})
-		.then(processResponse(form))
-		.then(handler)
-		.catch(
-			err => console.error(err)
-		)
-}
+export const projectUpdate = (form, code, version, values, handler) =>
+	update(`/api/projects/${code}`, form, version, values, handler)
 
-export const projectDelete = (form, code, version, handler) => {
-	fetch(`/api/projects/${code}`, {
-		method: 'delete',
-		headers: {
-			...authorizationHeader(),
-			...ifMatchHeader(version),
-		},
-	})
-		.then(processResponse(form))
-		.then(handler)
-		.catch(
-			err => console.error(err)
-		)
-}
+export const projectDelete = (form, code, version, handler) =>
+	delete_(`/api/projects/${code}`, form, version, handler)

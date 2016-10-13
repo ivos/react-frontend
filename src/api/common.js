@@ -91,3 +91,101 @@ export const authorizationHeader = () => {
 export const ifMatchHeader = (version) => ({
 	'If-Match': version,
 })
+
+export const list = (url, form, params, handler) => {
+	fetch(url, {
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
+	})
+		.then(processResponse(form))
+		.then(response => response.json())
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}
+
+export const read = (url, form, handler) => {
+	let version
+	fetch(url, {
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
+	})
+		.then(processResponse(form))
+		.then(response => {
+			version = response.headers.get('ETag')
+			return response
+		})
+		.then(response => response.json())
+		.then(values => handler(values, version))
+		.catch(
+			err => console.error(err)
+		)
+}
+
+export const create = (url, form, values, handler) => {
+	fetch(url, {
+		method: 'post',
+		headers: {
+			...jsonContentHeader(),
+			...authorizationHeader(),
+		},
+		body: JSON.stringify(values),
+	})
+		.then(processResponse(form))
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}
+
+export const update = (url, form, version, values, handler) => {
+	fetch(url, {
+		method: 'put',
+		headers: {
+			...jsonContentHeader(),
+			...authorizationHeader(),
+			...ifMatchHeader(version),
+		},
+		body: JSON.stringify(values),
+	})
+		.then(processResponse(form))
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}
+
+export const action = (url, form, version, handler) => {
+	fetch(url, {
+		method: 'put',
+		headers: {
+			...authorizationHeader(),
+			...ifMatchHeader(version),
+		},
+	})
+		.then(processResponse(form))
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}
+
+export const delete_ = (url, form, version, handler) => {
+	fetch(url, {
+		method: 'delete',
+		headers: {
+			...authorizationHeader(),
+			...ifMatchHeader(version),
+		},
+	})
+		.then(processResponse(form))
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}
