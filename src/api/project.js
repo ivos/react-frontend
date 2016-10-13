@@ -1,8 +1,11 @@
-import {processResponse, jsonContentHeader, authorizationHeader, ifMatchHeader} from './common'
+import {processResponse, acceptJsonHeader, jsonContentHeader, authorizationHeader, ifMatchHeader} from './common'
 
 export const projectList = (form, params, handler) => {
 	fetch('/api/projects', {
-		headers: authorizationHeader(),
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
 	})
 		.then(processResponse(form))
 		.then(response => response.json())
@@ -15,7 +18,10 @@ export const projectList = (form, params, handler) => {
 export const projectRead = (form, code, handler) => {
 	let version
 	fetch(`/api/projects/${code}`, {
-		headers: authorizationHeader(),
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
 	})
 		.then(processResponse(form))
 		.then(response => {

@@ -10,6 +10,7 @@ import moment from 'moment'
 import numeral from 'numeral'
 import numeralCs from 'numeral/languages/cs'
 numeral.language('cs', numeralCs)
+require('core-js/es7/array')
 
 initialize()
 

@@ -73,6 +73,10 @@ export const processResponse = (form, options) => response => {
 	return response
 }
 
+export const acceptJsonHeader = () => ({
+	'Accept': 'application/json',
+})
+
 export const jsonContentHeader = () => ({
 	'Content-Type': 'application/json',
 })

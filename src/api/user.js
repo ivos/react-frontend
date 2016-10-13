@@ -1,9 +1,12 @@
-import {processResponse, jsonContentHeader, authorizationHeader, ifMatchHeader} from './common'
+import {processResponse, acceptJsonHeader, jsonContentHeader, authorizationHeader, ifMatchHeader} from './common'
 import {getSession} from '../local-storage'
 
 export const userList = (form, params, handler) => {
 	fetch('/api/users', {
-		headers: authorizationHeader(),
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
 	})
 		.then(processResponse(form))
 		.then(response => response.json())
@@ -29,7 +32,10 @@ export const userCreate = (form, values, handler) => {
 export const userRead = (form, username, handler) => {
 	let version
 	fetch(`/api/users/${username}`, {
-		headers: authorizationHeader(),
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
 	})
 		.then(processResponse(form))
 		.then(response => {
@@ -98,7 +104,10 @@ export const userActivate = (form, username, version, handler) => {
 export const userSwitchTo = (form, username, handler) => {
 	fetch(`/api/users/${username}/actions/switch-to`, {
 		method: 'post',
-		headers: authorizationHeader(),
+		headers: {
+			...acceptJsonHeader(),
+			...authorizationHeader(),
+		},
 	})
 		.then(processResponse(form))
 		.then(response => response.json())
