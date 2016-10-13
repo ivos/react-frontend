@@ -21,6 +21,7 @@ const label = {
 		disable: 'Zrušit',
 		activate: 'Aktivovat',
 		switchTo: 'Přepnout do',
+		delete: 'Smazat',
 	},
 	user: {
 		msg: {
@@ -126,6 +127,12 @@ const label = {
 	},
 	projectDetail: {
 		title: 'Projekt',
+		'delete': {
+			warning: 'VAROVÁNÍ!',
+			info1: 'Chystáte se smazat tento projekt včetně všech jeho dat.',
+			info2: 'Tuto akci nelze vrátit. Jakmile tento projekt smažete, všechna jeho data budou nenávratně ztracena.',
+			confirm: 'Rozumím. Smazat projekt!',
+		},
 	},
 	projectCreate: {
 		title: 'Nový projekt',

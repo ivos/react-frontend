@@ -61,3 +61,18 @@ export const projectUpdate = (form, code, version, values, handler) => {
 			err => console.error(err)
 		)
 }
+
+export const projectDelete = (form, code, version, handler) => {
+	fetch(`/api/projects/${code}`, {
+		method: 'delete',
+		headers: {
+			...authorizationHeader(),
+			...ifMatchHeader(version),
+		},
+	})
+		.then(processResponse(form))
+		.then(handler)
+		.catch(
+			err => console.error(err)
+		)
+}

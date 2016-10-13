@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Form, TextField, CustomField, DateField, NumberField} from 'react-forms-ui'
-import {Panel, FormGroup, Button, Label} from 'react-bootstrap'
+import {Panel, FormGroup, Button, Label, Alert} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {LinkBack} from '../ui/buttons'
 import Loading from '../ui/Loading'
 import i18n from '../i18n'
 const t = i18n.t.bind(i18n)
 import wrapPage from '../wrapPage'
-import {projectRead} from '../api/project'
+import {projectRead, projectDelete} from '../api/project'
 import moment from 'moment'
 
 export const visibilityStyle = visibility => {
 	switch (visibility) {
 		case 'private':
 			return 'primary'
-		 case 'public':
+		case 'public':
 			return 'success'
 		default:
 			return null
@@ -33,7 +33,7 @@ const ProjectDetailPage = React.createClass({
 
 	render() {
 		const {code} = this.props.params
-		const {loading, values = {}} = this.state
+		const {loading, values = {}, deleting} = this.state
 		const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4'
 		const buttonsClass = 'col-sm-offset-2 col-sm-10'
 		return (
@@ -74,9 +74,25 @@ const ProjectDetailPage = React.createClass({
 									<span className="fa fa-edit"> </span> {t('button.edit')}
 								</Button>
 							</LinkContainer>
+							<Button className="spaced" onClick={this.handleDelete}>
+								<span className="fa fa-trash"> </span> {t('button.delete')}
+							</Button>
 							<LinkBack to="/projects"/>
 						</div>
 					</FormGroup>
+
+					{deleting &&
+					<Alert bsStyle="danger">
+						<p><strong>{t('projectDetail.delete.warning')}</strong></p>
+						<p>{t('projectDetail.delete.info1')}</p>
+						<p>{t('projectDetail.delete.info2')}</p>
+						<p>
+							<Button bsStyle="danger" onClick={this.handleConfirmDelete}>
+								{t('projectDetail.delete.confirm')}
+							</Button>
+						</p>
+					</Alert>
+					}
 				</Panel>
 			</Form>
 		)
@@ -88,8 +104,23 @@ const ProjectDetailPage = React.createClass({
 
 		const {code} = this.props.params
 		projectRead(this, code,
+			(values, version) => {
+				this.setState({values, version, loading: false})
+			}
+		)
+	},
+
+	handleDelete() {
+		const {deleting} = this.state
+		this.setState({deleting: !deleting})
+	},
+
+	handleConfirmDelete() {
+		const {router} = this.props
+		const {values: {code}, version} = this.state
+		projectDelete(this, code, version,
 			values => {
-				this.setState({values, loading: false})
+				router.push('/projects')
 			}
 		)
 	},

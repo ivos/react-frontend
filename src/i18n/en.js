@@ -21,6 +21,7 @@ const label = {
 		disable: 'Disable',
 		activate: 'Activate',
 		switchTo: 'Switch to',
+		delete: 'Delete',
 	},
 	user: {
 		msg: {
@@ -126,6 +127,12 @@ const label = {
 	},
 	projectDetail: {
 		title: 'Project',
+		'delete': {
+			warning: 'WARNING!',
+			info1: 'You will delete this project including all its data.',
+			info2: 'This action cannot be reversed. Once you proceed and delete the project, all its data will be irreversibly lost.',
+			confirm: 'I understand. Delete the project now!',
+		},
 	},
 	projectCreate: {
 		title: 'New project',
