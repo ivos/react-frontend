@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Form, TextField, CustomField, DateField, NumberField} from 'react-forms-ui'
+import {Form, TextField, CustomField, DateField, NumberField, TextAreaField} from 'react-forms-ui'
 import {Panel, FormGroup, Button, Label, Alert} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {LinkBack} from '../ui/buttons'
@@ -52,7 +52,7 @@ const ProjectDetailPage = React.createClass({
 						<Label bsStyle={visibilityStyle(values.visibility)}>
 							{t('project.visibility.values.' + values.visibility)}</Label>
 					</CustomField>
-					<TextField id="description" label={t('project.description')} classes={fieldClasses} readonly/>
+					<TextAreaField id="description" label={t('project.description')} classes={fieldClasses} readonly/>
 					<DateField id="start" label={t('project.start')} classes={fieldClasses} readonly/>
 					<NumberField id="duration" label={t('project.duration')} classes={fieldClasses} readonly/>
 					<NumberField id="budget" label={t('project.budget')} classes={fieldClasses} readonly/>
